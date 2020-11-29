@@ -1,0 +1,19 @@
+spring:
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure # 排除掉druid原生的自动配置
+  profiles:
+    active: 'dev'  #开发
+#    active: 'prod'  #生产
+mybatis-plus:
+  database:
+    type: oracle
+  mapper-locations:
+    - classpath*:mapper/*/*.xml
+    - classpath*:com/**/xml/*.xml
+  global-config:
+    db-config:
+      #   字段策略 0:"忽略判断",1:"非 NULL 判断",2:"非空判断"
+      field-strategy: 1
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

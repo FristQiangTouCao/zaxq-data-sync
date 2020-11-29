@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongtian.mapper.PztRyRlzpjlMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hongtian.entity.PztRyRlzpjl">
+        <id column="NBBH" property="nbbh" />
+        <result column="JMXQBH" property="jmxqbh" />
+        <result column="SBBH" property="sbbh" />
+        <result column="JLSJ" property="jlsj" />
+        <result column="JCBZ" property="jcbz" />
+        <result column="SJGSDW" property="sjgsdw" />
+        <result column="CLSJ" property="clsj" />
+        <result column="XM" property="xm" />
+        <result column="GMSFHM" property="gmsfhm" />
+        <result column="LYBS" property="lybs" />
+        <result column="XXFL" property="xxfl" />
+        <result column="JSYBZ" property="jsybz" />
+        <result column="SWRYBZ" property="swrybz" />
+        <result column="SARYBZ" property="sarybz" />
+        <result column="ZYRYBZ" property="zyrybz" />
+        <result column="BHRBZ" property="bhrbz" />
+        <result column="KYRBZ" property="kyrbz" />
+        <result column="ZPDTLJ" property="zpdtlj" />
+        <result column="ZPKTLJ" property="zpktlj" />
+        <result column="BZ" property="bz" />
+        <result column="GLM" property="glm" />
+        <result column="CJR" property="cjr" />
+        <result column="CJRJH" property="cjrjh" />
+        <result column="CJRXQ" property="cjrxq" />
+        <result column="CJRZRQ" property="cjrzrq" />
+        <result column="CJRIP" property="cjrip" />
+        <result column="CJSJ" property="cjsj" />
+        <result column="XGR" property="xgr" />
+        <result column="XGRJH" property="xgrjh" />
+        <result column="XGRIP" property="xgrip" />
+        <result column="XGRXQ" property="xgrxq" />
+        <result column="XGRZRQ" property="xgrzrq" />
+        <result column="XGSJ" property="xgsj" />
+        <result column="YXBZ" property="yxbz" />
+        <result column="FSBZ" property="fsbz" />
+        <result column="CLBZ" property="clbz" />
+        <result column="SBBZ" property="sbbz" />
+        <result column="SBMC" property="sbmc" />
+        <result column="FACEID" property="faceid" />
+        <result column="JCSSBH" property="jcssbh" />
+        <result column="RKBM" property="rkbm" />
+        <result column="JMXQMC" property="jmxqmc" />
+        <result column="SJLY" property="sjly" />
+        <result column="SIMLARITY" property="simlarity" />
+        <result column="LDBZ" property="ldbz" />
+        <result column="SFZHAF" property="sfzhaf" />
+        <result column="SSLX" property="sslx" />
+        <result column="RLJLID" property="rljlid" />
+        <result column="DTYPE" property="dtype" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        NBBH, JMXQBH, SBBH, JLSJ, JCBZ, SJGSDW, CLSJ, XM, GMSFHM, LYBS, XXFL, JSYBZ, SWRYBZ, SARYBZ, ZYRYBZ, BHRBZ, KYRBZ, ZPDTLJ, ZPKTLJ, BZ, GLM, CJR, CJRJH, CJRXQ, CJRZRQ, CJRIP, CJSJ, XGR, XGRJH, XGRIP, XGRXQ, XGRZRQ, XGSJ, YXBZ, FSBZ, CLBZ, SBBZ, SBMC, FACEID, JCSSBH, RKBM, JMXQMC, SJLY, SIMLARITY, LDBZ, SFZHAF, SSLX, RLJLID, DTYPE
+    </sql>
+
+</mapper>
