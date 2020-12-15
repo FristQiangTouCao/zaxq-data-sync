@@ -4,6 +4,14 @@ spring:
   profiles:
     active: 'dev'  #开发
 #    active: 'prod'  #生产
+  thymeleaf:
+    suffix: .html
+    check-template-location: true
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+    mode: LEGACYHTML5
+
 mybatis-plus:
   database:
     type: oracle

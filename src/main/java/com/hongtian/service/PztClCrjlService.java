@@ -1,7 +1,7 @@
 package com.hongtian.service;
 
-import com.hongtian.entity.PztClCrjl;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hongtian.entity.PztClCrjl;
 
 /**
  * <p>
@@ -11,6 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author weed
  * @since 2020-11-08
  */
-public interface PztClCrjlService extends IService<PztClCrjl> {
-
+public interface PztClCrjlService extends IService<PztClCrjl>, BaseService<PztClCrjl>  {
 }

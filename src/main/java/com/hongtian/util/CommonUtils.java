@@ -13,7 +13,7 @@ public class CommonUtils {
     // 获取车辆执行时间的集合的名称
     public static String getClCollectionNameSpecDay(String time) throws ParseException {
         if(time == null || time.length() < 8) {
-            throw new ParseException("时间格式必须是yyyyMMddHHmmss,字符串长度不可少与8",1);
+            return null;
         }
         time = time.substring(0,8);
         return time + Constant.CL_SUFFIX;
@@ -33,6 +33,4 @@ public class CommonUtils {
         time = time.substring(0,8);
         return time + Constant.RL_SUFFIX;
     }
-
-
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h3 style="text-align:center">数据同步后台监控</h3>
+        <p><label>启动时间:</label><span>{{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(new Number(data.startTime)))}}</span></p>
+        <p><label>运行时长:</label><span>{{dateCompute}}</span></p>
+        <p><label>磁盘大小:</label><span>{{data.totalSpace}}</span></p>
+        <p><label>已用空间:</label><span>{{data.freeSpace}}</span></p>
+<!--        <p><label>执行人脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
+<!--        <p><label>执行车脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
+<!--        <p><label>人脸记录同步数:</label><span>{{wcs}}</span></p>-->
+<!--        <p><label>车脸记录同步数:</label><span>{{wcs}}</span></p>-->
+    </div>
+</body>
+<script src="/js/vue.min.js"></script>
+<script th:inline="javascript">
+    new Vue({
+        el: '#app',
+        data:{
+            host: [[${host}]],
+            port: [[${port}]],
+            point: [[${point}]],
+            websocket: null,
+            data:{
+                startTime: 0
+            }
+        },
+        methods:{
+            dateFormat(fmt, date) {
+                let ret;
+                const opt = {
+                    "Y+": date.getFullYear().toString(),        // 年
+                    "m+": (date.getMonth() + 1).toString(),     // 月
+                    "d+": date.getDate().toString(),            // 日
+                    "H+": date.getHours().toString(),           // 时
+                    "M+": date.getMinutes().toString(),         // 分
+                    "S+": date.getSeconds().toString()          // 秒
+                    // 有其他格式化字符需求可以继续添加，必须转化成字符串
+                };
+                for (let k in opt) {
+                    ret = new RegExp("(" + k + ")").exec(fmt);
+                    if (ret) {
+                        fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+                    };
+                };
+                return fmt;
+            }
+        },
+        computed:{
+            dateCompute(){
+                let d1 = this.data.startTime
+                let dateBegin = new Date(new Number(1606723807445));//将-转化为/，使用new Date
+                let dateEnd = new Date();//获取当前时间
+                let dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
+                let dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));//计算出相差天数
+                let leave1=dateDiff%(24*3600*1000) //计算天数后剩余的毫秒数
+                let hours=Math.floor(leave1/(3600*1000))//计算出小时数
+                //计算相差分钟数
+                let leave2=leave1%(3600*1000) //计算小时数后剩余的毫秒数
+                let minutes=Math.floor(leave2/(60*1000))//计算相差分钟数
+                //计算相差秒数
+                let leave3=leave2%(60*1000) //计算分钟数后剩余的毫秒数
+                let seconds=Math.round(leave3/1000)
+                debugger
+                return dayDiff+"天" + hours + "小时" + minutes + "分钟" + seconds + "秒"
+            }
+        },
+        mounted(){
+            this.websocket = new WebSocket('ws://'+ this.host + ':' + this.port + this.point)
+            this.websocket.onmessage = (message) => {
+                this.data = JSON.parse(message.data);
+            }
+        }
+    })
+</script>
+</html>

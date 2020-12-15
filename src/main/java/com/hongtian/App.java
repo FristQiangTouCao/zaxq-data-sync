@@ -1,28 +1,42 @@
 package com.hongtian;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hongtian.dao.PztClCrjlDao;
-import com.hongtian.entity.PztClCrjl;
-import com.hongtian.mapper.PztClCrjlMapper;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
+import com.hongtian.schedule.BaseProcessor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.domain.Pageable;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+import java.util.Map;
 
 @SpringBootApplication
 @MapperScan("com.hongtian.mapper")
+@EnableScheduling
 public class App {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(App.class);
-        PztClCrjlMapper bean = run.getBean(PztClCrjlMapper.class);
-        IPage<PztClCrjl> objectPage = new Page<>(1, 10);
-        IPage<PztClCrjl> pztClCrjlIPage = bean.selectPage(objectPage, new QueryWrapper<PztClCrjl>());
-        System.out.println();
-        PztClCrjlDao bean1 = run.getBean(PztClCrjlDao.class);
-        bean1.insert(pztClCrjlIPage.getRecords());
+        Map<String, BaseProcessor> beansOfType = run.getBeansOfType(BaseProcessor.class);System.out.println(beansOfType);
 
+    }
+
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
+        // paginationInterceptor.setOverflow(false);
+        // 设置最大单页限制数量，默认 500 条，-1 不受限制
+        // paginationInterceptor.setLimit(500);
+        // 开启 count 的 join 优化,只针对部分 left join
+        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+        return paginationInterceptor;
+    }
+
+    @Bean
+    public ServerEndpointExporter serverEndpointExporter() {
+        return new ServerEndpointExporter();
     }
 }

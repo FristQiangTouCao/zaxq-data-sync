@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongtian.mapper.PztRyJbMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hongtian.entity.PztRyJb">
+        <id column="RKBM" property="rkbm" />
+        <result column="XM" property="xm" />
+        <result column="CYM" property="cym" />
+        <result column="BMCH" property="bmch" />
+        <result column="XB" property="xb" />
+        <result column="GJDQ" property="gjdq" />
+        <result column="JG" property="jg" />
+        <result column="MZ" property="mz" />
+        <result column="CSRQ" property="csrq" />
+        <result column="GMSFHM" property="gmsfhm" />
+        <result column="HJDSSXQ" property="hjdssxq" />
+        <result column="HJDXZ" property="hjdxz" />
+        <result column="HJDXQ" property="hjdxq" />
+        <result column="HJDDZBM" property="hjddzbm" />
+        <result column="XZDSSXQ" property="xzdssxq" />
+        <result column="XZDXZ" property="xzdxz" />
+        <result column="XZDXQ" property="xzdxq" />
+        <result column="XZDDZBM" property="xzddzbm" />
+        <result column="LXDH" property="lxdh" />
+        <result column="YWX" property="ywx" />
+        <result column="YWM" property="ywm" />
+        <result column="ZJZL" property="zjzl" />
+        <result column="ZJHM" property="zjhm" />
+        <result column="JWRYSF" property="jwrysf" />
+        <result column="RJRQ" property="rjrq" />
+        <result column="JLSY" property="jlsy" />
+        <result column="NLKRQ" property="nlkrq" />
+        <result column="WHCD" property="whcd" />
+        <result column="HYZK" property="hyzk" />
+        <result column="ZY" property="zy" />
+        <result column="ZYLB" property="zylb" />
+        <result column="FWCS" property="fwcs" />
+        <result column="ZJXY" property="zjxy" />
+        <result column="ZZMM" property="zzmm" />
+        <result column="BYZK" property="byzk" />
+        <result column="XX" property="xx" />
+        <result column="LKRQ" property="lkrq" />
+        <result column="QWDGJ" property="qwdgj" />
+        <result column="QWDSSXQ" property="qwdssxq" />
+        <result column="QWDXZ" property="qwdxz" />
+        <result column="SWRQ" property="swrq" />
+        <result column="ZXRQ" property="zxrq" />
+        <result column="ZXBS" property="zxbs" />
+        <result column="ZASJLY" property="zasjly" />
+        <result column="LJSL" property="ljsl" />
+        <result column="YXLJSL" property="yxljsl" />
+        <result column="RYID" property="ryid" />
+        <result column="HHID" property="hhid" />
+        <result column="HHNBID" property="hhnbid" />
+        <result column="HH" property="hh" />
+        <result column="YHZGX" property="yhzgx" />
+        <result column="SMJB" property="smjb" />
+        <result column="RYGLCC" property="ryglcc" />
+        <result column="XMPY" property="xmpy" />
+        <result column="CJR" property="cjr" />
+        <result column="XGR" property="xgr" />
+        <result column="CJSJ" property="cjsj" />
+        <result column="XGSJ" property="xgsj" />
+        <result column="ZWXM" property="zwxm" />
+        <result column="HJDX" property="hjdx" />
+        <result column="HJDY" property="hjdy" />
+        <result column="HJDZ" property="hjdz" />
+        <result column="XZDX" property="xzdx" />
+        <result column="XZDY" property="xzdy" />
+        <result column="XZDZ" property="xzdz" />
+        <result column="HJDZRQ" property="hjdzrq" />
+        <result column="XZDZRQ" property="xzdzrq" />
+        <result column="ZW" property="zw" />
+        <result column="DNA" property="dna" />
+        <result column="SG" property="sg" />
+        <result column="SFQRBZ" property="sfqrbz" />
+        <result column="CJRJH" property="cjrjh" />
+        <result column="CJRXQ" property="cjrxq" />
+        <result column="CJRZRQ" property="cjrzrq" />
+        <result column="CJRIP" property="cjrip" />
+        <result column="XGRJH" property="xgrjh" />
+        <result column="XGRXQ" property="xgrxq" />
+        <result column="XGRZRQ" property="xgrzrq" />
+        <result column="XGRIP" property="xgrip" />
+        <result column="DWZZJG" property="dwzzjg" />
+        <result column="HFAJBH" property="hfajbh" />
+        <result column="ZDGZBZ" property="zdgzbz" />
+        <result column="GZDSSXQ" property="gzdssxq" />
+        <result column="GZDXZ" property="gzdxz" />
+        <result column="GZDXQ" property="gzdxq" />
+        <result column="GZDDZBM" property="gzddzbm" />
+        <result column="GZDX" property="gzdx" />
+        <result column="GZDY" property="gzdy" />
+        <result column="GZDZ" property="gzdz" />
+        <result column="GZDZRQ" property="gzdzrq" />
+        <result column="YXBZ" property="yxbz" />
+        <result column="SBBZ" property="sbbz" />
+        <result column="GLM" property="glm" />
+        <result column="FSBZ" property="fsbz" />
+        <result column="CLBZ" property="clbz" />
+        <result column="BZ" property="bz" />
+        <result column="RYDYLB" property="rydylb" />
+        <result column="QZZL" property="qzzl" />
+        <result column="QZHM" property="qzhm" />
+        <result column="HJDJMXQBH" property="hjdjmxqbh" />
+        <result column="XZDJMXQBH" property="xzdjmxqbh" />
+        <result column="RKGLLBDM" property="rkgllbdm" />
+        <result column="SYRKDZZDJLXDM" property="syrkdzzdjlxdm" />
+        <result column="RHYZBS" property="rhyzbs" />
+        <result column="GABXZDDZBM" property="gabxzddzbm" />
+        <result column="GABHJDDZBM" property="gabhjddzbm" />
+        <result column="DJDW_GAJGJGDM" property="djdwGajgjgdm" />
+        <result column="DJDW_GAJGMC" property="djdwGajgmc" />
+        <result column="SJGSDWMC" property="sjgsdwmc" />
+        <result column="SJGSDWDM" property="sjgsdwdm" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        RKBM, XM, CYM, BMCH, XB, GJDQ, JG, MZ, CSRQ, GMSFHM, HJDSSXQ, HJDXZ, HJDXQ, HJDDZBM, XZDSSXQ, XZDXZ, XZDXQ, XZDDZBM, LXDH, YWX, YWM, ZJZL, ZJHM, JWRYSF, RJRQ, JLSY, NLKRQ, WHCD, HYZK, ZY, ZYLB, FWCS, ZJXY, ZZMM, BYZK, XX, LKRQ, QWDGJ, QWDSSXQ, QWDXZ, SWRQ, ZXRQ, ZXBS, ZASJLY, LJSL, YXLJSL, RYID, HHID, HHNBID, HH, YHZGX, SMJB, RYGLCC, XMPY, CJR, XGR, CJSJ, XGSJ, ZWXM, HJDX, HJDY, HJDZ, XZDX, XZDY, XZDZ, HJDZRQ, XZDZRQ, ZW, DNA, SG, SFQRBZ, CJRJH, CJRXQ, CJRZRQ, CJRIP, XGRJH, XGRXQ, XGRZRQ, XGRIP, DWZZJG, HFAJBH, ZDGZBZ, GZDSSXQ, GZDXZ, GZDXQ, GZDDZBM, GZDX, GZDY, GZDZ, GZDZRQ, YXBZ, SBBZ, GLM, FSBZ, CLBZ, BZ, RYDYLB, QZZL, QZHM, HJDJMXQBH, XZDJMXQBH, RKGLLBDM, SYRKDZZDJLXDM, RHYZBS, GABXZDDZBM, GABHJDDZBM, DJDW_GAJGJGDM, DJDW_GAJGMC, SJGSDWMC, SJGSDWDM
+    </sql>
+
+</mapper>
