@@ -44,6 +44,6 @@ public class SjClLogDao extends BaseDao<SjClLog> {
     }
 
     public SjClLog getById(String id) {
-        return mongoTemplate.findById(id,SjClLog.class,SjClLog.class.getSimpleName());
+        return mongoTemplate.findById(id,SjClLog.class);
     }
 }

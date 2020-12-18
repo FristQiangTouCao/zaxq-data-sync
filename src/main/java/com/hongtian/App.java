@@ -1,6 +1,5 @@
 package com.hongtian;
 
-import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.hongtian.schedule.BaseProcessor;
@@ -50,7 +49,6 @@ public class App {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new FastJsonRedisSerializer<>(Object.class));
         return template;
     }
 }
