@@ -18,14 +18,14 @@
             <h3 style="text-align:center">数据同步后台监控</h3>
             <el-row  style="border: solid 1px black">
                 <el-col :span="12" style="padding:0 10px">
-                    <h3 style="text-align:center;border-bottom: solid 1px black">mongo</h3>
+                    <h3 style="text-align:center;border-bottom: solid 1px black"><img src="/img/mongodb-logo.png" height="45" alt="mongo"></h3>
                     <p><label>启动时间:</label><span>{{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(new Number(data.startTime)))}}</span></p>
                     <p><label>运行时长:</label><span>{{dateCompute}}</span></p>
                     <p><label>磁盘大小:</label><span style="color: green">{{data.totalSpace}}</span></p>
                     <p><label>已用空间:</label><span>{{data.freeSpace}}</span></p>
                 </el-col>
                 <el-col :span="12" style="border-left: solid 1px black;padding:0 10px">
-                    <h3 style="text-align:center;border-bottom: solid 1px black">redis</h3>
+                    <h3 style="text-align:center;border-bottom: solid 1px black"><img src="/img/redis-white.png" height="45" alt="redis"></h3>
                     <el-row>
                         <el-col :span="12">
                             <p><label>占用内存:</label><span>{{redisInfo['used_memory_human']}}</span></p>
