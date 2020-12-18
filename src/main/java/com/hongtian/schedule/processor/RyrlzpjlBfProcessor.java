@@ -3,10 +3,9 @@ package com.hongtian.schedule.processor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hongtian.dao.PztRyrlzpjlDao;
 import com.hongtian.entity.PztRyRlzpjl;
-import com.hongtian.entity.SjBfLog;
+import com.hongtian.entity.SjClLog;
 import com.hongtian.schedule.BaseProcessor;
 import com.hongtian.schedule.Job;
-import com.hongtian.schedule.JobProcessorIntervalTime;
 import com.hongtian.service.PztRyRlzpjlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,13 +30,13 @@ public class RyrlzpjlBfProcessor extends BaseProcessor<PztRyRlzpjl> {
         return Job.RY_LZPJL_BACK;
     }
 
-    @Override
-    public JobProcessorIntervalTime intervalTime() {
-        return JobProcessorIntervalTime.TEN_MINUTES;
-    }
 
+    /**
+     * 数据保存更新clbz放在pztRyrlzpjlDao中处理
+     * @param SjClLog
+     */
     @Override
-    public void execute(SjBfLog sjBfLog) {
+    public void execute(SjClLog SjClLog) {
         boolean recordedTotal = false;
         while(true){
             // 获取记录
@@ -50,11 +49,11 @@ public class RyrlzpjlBfProcessor extends BaseProcessor<PztRyRlzpjl> {
             pztRyrlzpjlDao.insert(list);
             // 更新日志
             if(!recordedTotal) {
-                sjBfLog.setTotal((int)page.getTotal());
+                SjClLog.setTotal((int)page.getTotal());
                 recordedTotal = true;
             }
-            sjBfLog.setSuccessCount(sjBfLog.getSuccessCount() + list.size());
-            updateLog(sjBfLog);
+            SjClLog.setSuccessCount(SjClLog.getSuccessCount() + list.size());
+            updateLog(SjClLog);
         }
     }
 }

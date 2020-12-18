@@ -28,7 +28,7 @@ public class PztClCrjlServiceImpl extends ServiceImpl<PztClCrjlMapper, PztClCrjl
     public Page<PztClCrjl> getUnHandleJl() {
         Page<PztClCrjl> page = new Page<PztClCrjl>(getPage(),getSize());
         QueryWrapper<PztClCrjl> query = new QueryWrapper<PztClCrjl>();
-        query.ne("clbz","0").or().isNull("clbz");
+        query.ne("clbz","1").or().isNull("clbz");
         query.orderByAsc("jlsj");
         Page<PztClCrjl> pztClCrjlPage = pztClCrjlMapper.selectPage(page, query);
         return pztClCrjlPage;

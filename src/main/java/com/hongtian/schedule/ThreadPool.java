@@ -46,4 +46,7 @@ public class ThreadPool {
         }
         return false;
     }
+    public int coreCount() {
+        return threadPoolExecutor.getCorePoolSize();
+    }
 }

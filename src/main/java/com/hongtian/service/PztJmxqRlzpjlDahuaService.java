@@ -11,6 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author weed
  * @since 2020-12-15
  */
-public interface PztJmxqRlzpjlDahuaService extends IService<PztJmxqRlzpjlDahua> {
-
+public interface PztJmxqRlzpjlDahuaService extends IService<PztJmxqRlzpjlDahua>,BaseService<PztJmxqRlzpjlDahua> {
 }

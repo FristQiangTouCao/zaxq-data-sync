@@ -1,17 +1,21 @@
 package com.hongtian.entity;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * @author weed
  * @date 2020/11/30 0030 10:45
  * @description 数据备份日志
  */
-public class SjBfLog {
+public class SjClLog {
+    @Id
+    private String id;
     // 开始时间
-    private String startTime;
+    private long startTime;
     // 结束时间
-    private String endTime;
+    private long endTime;
     // 修改时间
-    private String updateTime;
+    private long updateTime;
     // 总数
     private int total;
     // 成功数
@@ -30,19 +34,19 @@ public class SjBfLog {
     // 备注
     private String bz;
 
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 
@@ -58,11 +62,11 @@ public class SjBfLog {
         return successCount;
     }
 
-    public String getUpdateTime() {
+    public long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -96,6 +100,14 @@ public class SjBfLog {
 
     public String getBz() {
         return bz;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setBz(String bz) {

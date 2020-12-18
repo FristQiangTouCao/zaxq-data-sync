@@ -12,4 +12,5 @@ import com.hongtian.entity.PztClCrjl;
  * @since 2020-11-08
  */
 public interface PztClCrjlService extends IService<PztClCrjl>, BaseService<PztClCrjl>  {
+
 }

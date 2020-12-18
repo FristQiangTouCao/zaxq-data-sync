@@ -24,8 +24,8 @@ public class TaskExecuteThread implements Runnable{
         while(true) {
             // 判断corn表达式
             if(true) {
-                System.out.println("执行");
-//                check();
+                check();
+
             }
         }
     }
@@ -43,7 +43,12 @@ public class TaskExecuteThread implements Runnable{
 
     public void execute(ProcessorDefinition processorDefinition) {
         BaseProcessor baseProcessor = processorDefinition.getBaseProcessor();
-        baseProcessor.run();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                baseProcessor.run();
+            }
+        }).start();
     }
 
 }

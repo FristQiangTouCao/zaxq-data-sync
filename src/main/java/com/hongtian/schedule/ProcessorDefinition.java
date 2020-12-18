@@ -27,4 +27,7 @@ public class ProcessorDefinition {
 
     // 任务名称
     private String jobProcessorType;
+
+    // 最近一次运行的时间
+    private long lastRunningTime;
 }

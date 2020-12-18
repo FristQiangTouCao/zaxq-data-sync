@@ -1,14 +1,22 @@
 package com.hongtian.controller;
 
+import com.hongtian.common.response.CommonResult;
+import com.hongtian.component.SystemInfoComponent;
+import com.hongtian.dao.redisDao.RedisServices;
+import com.hongtian.entity.vo.TodayTaskInfoVo;
 import com.hongtian.util.SystemInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 /**
  * @author weed
@@ -26,6 +34,12 @@ public class SystemInfoController {
     @Value("${dataDir}")
     public String dataDir;
 
+    @Autowired
+    private RedisServices redisServices;
+
+    @Autowired
+    private SystemInfoComponent systemInfoComponent;
+
     private String point = "/system";
 
     @PostConstruct
@@ -40,6 +54,23 @@ public class SystemInfoController {
         model.addAttribute("host",serverHost);
         model.addAttribute("port",serverPort);
         model.addAttribute("point",point);
+        model.addAttribute("todayTaskInfo",systemInfoComponent.getTodayTaskInfo());
+        model.addAttribute("redisInfo",redisServices.getRedisInfo());
         return "SystemInfo";
+    }
+
+    // 今日执行的任务
+    @ResponseBody
+    @GetMapping("/todayTaskInfo")
+    public Object todayTaskExecuteCase() {
+        List<TodayTaskInfoVo> todayTaskInfo = systemInfoComponent.getTodayTaskInfo();
+        return CommonResult.successData(todayTaskInfo);
+    }
+
+
+    @ResponseBody
+    @GetMapping("runningTaskList")
+    public Object runningTaskList() {
+        return null;
     }
 }

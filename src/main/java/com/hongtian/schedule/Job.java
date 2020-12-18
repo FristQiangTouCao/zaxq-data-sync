@@ -5,12 +5,12 @@ package com.hongtian.schedule;
  * @date 2020/12/15 0015 16:27
  * @description
  */
-public enum  Job {
+public enum  Job implements Comparable<Job>{
 
     // 落地任务
-    RY_RLZPJL_LD("人脸抓拍落地",JobProcessorIntervalTime.TEN_MINUTES),
-    RY_LZPJL_BACK("人脸抓拍记录备份",JobProcessorIntervalTime.TEN_MINUTES),
-    CL_CRJL_BACK("车辆出入记录备份",JobProcessorIntervalTime.TEN_MINUTES);
+    RY_RLZPJL_LD("人脸抓拍落地",JobProcessorIntervalTime.ONE_MINUTES),
+    RY_LZPJL_BACK("人脸抓拍记录备份",JobProcessorIntervalTime.ONE_MINUTES),
+    CL_CRJL_BACK("车辆出入记录备份",JobProcessorIntervalTime.ONE_MINUTES);
 
 
     // 名称
@@ -59,4 +59,6 @@ public enum  Job {
     public void setOrder(int order) {
         this.order = order;
     }
+
+
 }

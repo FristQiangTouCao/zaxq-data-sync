@@ -1,11 +1,13 @@
 package com.hongtian.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Id;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -22,7 +24,7 @@ public class PztJmxqRlzpjlDahua extends Model<PztJmxqRlzpjlDahua> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("ID")
+    @Id
     private String id;
 
     @TableField("LSID")
@@ -57,6 +59,9 @@ public class PztJmxqRlzpjlDahua extends Model<PztJmxqRlzpjlDahua> {
 
     @TableField("BL2")
     private String bl2;
+
+    @TableField("CLBZ")
+    private String clbz;
 
 
     @Override

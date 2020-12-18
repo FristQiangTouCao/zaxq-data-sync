@@ -1,13 +1,9 @@
 package com.hongtian.schedule;
 
-import com.hongtian.dao.SjBfLogDao;
-import com.hongtian.entity.SjBfLog;
-import com.hongtian.util.DateTimeUtils;
+import com.hongtian.dao.mongo.SjClLogDao;
+import com.hongtian.entity.SjClLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.util.Date;
 
 /**
  * @author weed
@@ -35,58 +31,55 @@ public abstract class BaseProcessor<T> {
     protected MongoTemplate mongoTemplate;
 
     @Autowired
-    protected SjBfLogDao sjBfLogDao;
+    protected SjClLogDao SjClLogDao;
 
     private String corn;
 
     // 任务名称
     public abstract Job getType();
 
-    // 执行间隔时间
-    public abstract JobProcessorIntervalTime intervalTime();
 
-
-    // 启用多线程
+    // 启用多线程 -- 目前没有实现
     public boolean startThreadPool(){
         return false;
     }
 
-    @Scheduled(cron = "0 */1 * * * ?")
+
     public void run() {
-        System.out.println("执行"+new Date()+getType());
-        SjBfLog sjBfLog = executeBefore();
+        SjClLog SjClLog = executeBefore();
         try {
-            execute(sjBfLog);
-            sjBfLog.setStatus(1);
+            execute(SjClLog);
+            SjClLog.setStatus(1);
             resultCode = 2;
         }catch (Exception e) {
-            sjBfLog.setStatus(2);
+            SjClLog.setStatus(2);
             e.printStackTrace();
-            sjBfLog.setBz(e.getMessage());
+            SjClLog.setBz(e.getMessage());
             resultCode = 3;
         }finally {
             executeAfter();
-            sjBfLog.setEndTime(DateTimeUtils.now());
-            updateLog(sjBfLog);
+            SjClLog.setEndTime(System.currentTimeMillis());
+            updateLog(SjClLog);
             executeStatus = false;
             lastActiveTime = System.currentTimeMillis();
         }
     }
 
-    public SjBfLog executeBefore() {
+    public SjClLog executeBefore() {
         processorContext.processorStart(this);
         startTime = System.currentTimeMillis();
         executeStatus = true;
         resultCode = 1;
         lastActiveTime = startTime;
-        SjBfLog sjBfLog = new SjBfLog();
-        sjBfLog.setStatus(0);
-        sjBfLog.setStartTime(DateTimeUtils.now());
-        sjBfLog.setType(getType().getName());
-        return sjBfLog;
+        SjClLog SjClLog = new SjClLog();
+        SjClLog.setStatus(0);
+        SjClLog.setStartTime(startTime);
+        SjClLog.setType(getType().getName());
+        SjClLogDao.insert(SjClLog);
+        return SjClLog;
     }
 
-    public void execute(SjBfLog sjBfLog) {
+    public void execute(SjClLog SjClLog) {
         throw new NullPointerException("此方法需要实现！");
     }
 
@@ -94,9 +87,9 @@ public abstract class BaseProcessor<T> {
         processorContext.processorEnd(this);
     }
 
-    public void updateLog(SjBfLog sjBfLog) {
-        sjBfLog.setUpdateTime(DateTimeUtils.now());
-        sjBfLogDao.save(sjBfLog);
+    public void updateLog(SjClLog SjClLog) {
+        SjClLog.setUpdateTime(System.currentTimeMillis());
+        SjClLogDao.save(SjClLog);
     }
 
 }

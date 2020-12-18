@@ -1,7 +1,7 @@
 package com.hongtian.service;
 
-import com.hongtian.entity.PztRyRlzpjl;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hongtian.entity.PztRyRlzpjl;
 
 import java.util.List;
 
@@ -14,4 +14,6 @@ import java.util.List;
  * @since 2020-11-08
  */
 public interface PztRyRlzpjlService extends IService<PztRyRlzpjl>, BaseService<PztRyRlzpjl>{
+
+    List<PztRyRlzpjl> getZpjlByFaceId(String faceId);
 }

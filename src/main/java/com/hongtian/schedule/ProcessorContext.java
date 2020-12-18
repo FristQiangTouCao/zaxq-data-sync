@@ -1,12 +1,15 @@
 package com.hongtian.schedule;
 
+import com.hongtian.dao.mongo.XtpzDao;
+import com.hongtian.entity.XtPz;
+import com.hongtian.util.Constant;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,31 +21,57 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class ProcessorContext implements ApplicationContextAware {
 
+
+    @Autowired
+    private XtpzDao xtpzDao;
+
     private ThreadPool threadPool = new ThreadPool();
 
     public ApplicationContext applicationContext;
+    // 启动的任务
+    public List<String> startTasks = new ArrayList<>();
 
     // 所有的处理程序
     public List<BaseProcessor> processors;
 
-    // 所有的任务
-    private List<Job> jobs;
+    // 所有定时任务间隔类型
+    public List<JobProcessorIntervalTime> processorIntervalTimes;
 
-    private Map<Job,ProcessorDefinition> processorDefinitions = new HashMap<>();
+    // 所有的任务
+    public List<Job> jobs;
+
+    public Map<Job,ProcessorDefinition> processorDefinitions = new HashMap<>();
 
     // 通过时间间隔分组
     public Map<JobProcessorIntervalTime,List<ProcessorDefinition>> processorByGroup = new ConcurrentHashMap<>();
 
-    @PostConstruct
+
     public void init() {
+        // 加载所有时间类型
+        loadAllIntervalTimeEnums();
         // 加载所有的任务配置枚举
         loadAllJobs();
         // 加载所有的处理程序
         loadAllProcessor();
         // 处理程序通过时间分类
         processorGroup();
-        // 创建线程
-        createTaskThread();
+        // 获取启动的任务
+        loadStartTasks();
+    }
+
+    public void loadStartTasks() {
+        XtPz xtPz = xtpzDao.getXtPz(Constant.START_TASK);
+        if(xtPz != null) {
+            String[] split = xtPz.getValue().split(",");
+            if(split.length > 0) {
+                this.startTasks =Arrays.asList(split);
+            }
+        }
+    }
+
+    private void  loadAllIntervalTimeEnums() {
+        JobProcessorIntervalTime[] enumConstants = JobProcessorIntervalTime.class.getEnumConstants();
+        processorIntervalTimes = Arrays.asList(enumConstants);
     }
 
     private void loadAllJobs() {
@@ -64,7 +93,7 @@ public class ProcessorContext implements ApplicationContextAware {
             return;
         }
         processors.forEach(item -> {
-            JobProcessorIntervalTime intervalTime = item.intervalTime();
+            JobProcessorIntervalTime intervalTime = item.getType().getJobProcessorIntervalTime();
             List<ProcessorDefinition> list = null;
             if (processorByGroup.containsKey(intervalTime)) {
                 list = processorByGroup.get(intervalTime);
@@ -92,6 +121,7 @@ public class ProcessorContext implements ApplicationContextAware {
         }
         Set<JobProcessorIntervalTime> jobTime = processorByGroup.keySet();
         threadPool.init(size,size);
+
         for(JobProcessorIntervalTime processorIntervalTime: jobTime) {
             threadPool.excute(new TaskExecuteThread(this,processorIntervalTime));
         }
@@ -107,6 +137,7 @@ public class ProcessorContext implements ApplicationContextAware {
         ProcessorDefinition definition = processorDefinitions.get(baseProcessor.getType());
         if(definition != null) {
             definition.setRunning(false);
+            definition.setLastRunningTime(System.currentTimeMillis());
         }
     }
 

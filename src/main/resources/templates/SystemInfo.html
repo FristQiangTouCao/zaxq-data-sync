@@ -4,21 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        h3{
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <h3 style="text-align:center">数据同步后台监控</h3>
-        <p><label>启动时间:</label><span>{{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(new Number(data.startTime)))}}</span></p>
-        <p><label>运行时长:</label><span>{{dateCompute}}</span></p>
-        <p><label>磁盘大小:</label><span>{{data.totalSpace}}</span></p>
-        <p><label>已用空间:</label><span>{{data.freeSpace}}</span></p>
-<!--        <p><label>执行人脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
-<!--        <p><label>执行车脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
-<!--        <p><label>人脸记录同步数:</label><span>{{wcs}}</span></p>-->
-<!--        <p><label>车脸记录同步数:</label><span>{{wcs}}</span></p>-->
+    <div id="app" v-cloak>
+        <div v-cloak>
+            <h3 style="text-align:center">数据同步后台监控</h3>
+            <el-row  style="border: solid 1px black">
+                <el-col :span="12" style="padding:0 10px">
+                    <h3 style="text-align:center;border-bottom: solid 1px black">mongo</h3>
+                    <p><label>启动时间:</label><span>{{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(new Number(data.startTime)))}}</span></p>
+                    <p><label>运行时长:</label><span>{{dateCompute}}</span></p>
+                    <p><label>磁盘大小:</label><span style="color: green">{{data.totalSpace}}</span></p>
+                    <p><label>已用空间:</label><span>{{data.freeSpace}}</span></p>
+                </el-col>
+                <el-col :span="12" style="border-left: solid 1px black;padding:0 10px">
+                    <h3 style="text-align:center;border-bottom: solid 1px black">redis</h3>
+                    <el-row>
+                        <el-col :span="12">
+                            <p><label>占用内存:</label><span>{{redisInfo['used_memory_human']}}</span></p>
+                            <p><label>内存使用峰值:</label><span>{{redisInfo['used_memory_peak_human']}}</span></p>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-table
+                                    :data="redisInfo.keysInfo"
+                                    style="width: 100%">
+                                <el-table-column
+                                        prop="key"
+                                        label="文档名称"
+                                        >
+                                </el-table-column>
+                                <el-table-column
+                                        prop="value"
+                                        label="长度"
+                                       >
+                                </el-table-column>
+                            </el-table>
+                        </el-col>
+                    </el-row>
+
+                </el-col>
+            </el-row>
+            <!--        <p><label>执行人脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
+            <!--        <p><label>执行车脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
+            <!--        <p><label>人脸记录同步数:</label><span>{{wcs}}</span></p>-->
+            <!--        <p><label>车脸记录同步数:</label><span>{{wcs}}</span></p>-->
+            <h3 style="text-align: center">当日运行数据</h3>
+            <el-table
+                    :data="todayTaskInfo"
+                    style="width: 100%"
+                    tooltip-effect="dark"
+                    @selection-change="handleSelectionChange"
+            >
+                <el-table-column
+                        prop="taskName"
+                        label="任务名称"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="handleCount"
+                        label="处理数据(条)"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="runningCount"
+                        label="运行次数"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="running"
+                        label="运行状态">
+                    <template slot-scope="scope">
+                        <el-tag v-if="!scope.row.running">空闲中</el-tag>
+                        <el-tag v-else type="danger">运行中</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="runningIntervalTime"
+                        label="运行间隔">
+                </el-table-column>
+                <el-table-column
+                        prop="lastRunningTime"
+                        label="最后一次运行时间">
+                    <template slot-scope="scope">
+                        {{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(scope.row.lastRunningTime))}}
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
     </div>
 </body>
 <script src="/js/vue.min.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script th:inline="javascript">
     new Vue({
         el: '#app',
@@ -26,10 +110,13 @@
             host: [[${host}]],
             port: [[${port}]],
             point: [[${point}]],
+            todayTaskInfo: [[${todayTaskInfo}]],
             websocket: null,
+            redisInfo: [[${redisInfo}]],
             data:{
                 startTime: 0
-            }
+            },
+            multipleSelection: []
         },
         methods:{
             dateFormat(fmt, date) {
@@ -50,12 +137,15 @@
                     };
                 };
                 return fmt;
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val
             }
         },
         computed:{
             dateCompute(){
                 let d1 = this.data.startTime
-                let dateBegin = new Date(new Number(1606723807445));//将-转化为/，使用new Date
+                let dateBegin = new Date(new Number(d1));//将-转化为/，使用new Date
                 let dateEnd = new Date();//获取当前时间
                 let dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
                 let dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));//计算出相差天数
@@ -67,16 +157,18 @@
                 //计算相差秒数
                 let leave3=leave2%(60*1000) //计算分钟数后剩余的毫秒数
                 let seconds=Math.round(leave3/1000)
-                debugger
                 return dayDiff+"天" + hours + "小时" + minutes + "分钟" + seconds + "秒"
             }
         },
-        mounted(){
-            this.websocket = new WebSocket('ws://'+ this.host + ':' + this.port + this.point)
+        mounted: function () {
+            this.websocket = new WebSocket('ws://' + this.host + ':' + this.port + this.point)
             this.websocket.onmessage = (message) => {
                 this.data = JSON.parse(message.data);
+                this.todayTaskInfo = this.data['todayTaskInfo']
+                this.redisInfo = this.data['redisInfo']
             }
         }
     })
 </script>
+
 </html>

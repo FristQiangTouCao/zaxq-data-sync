@@ -9,6 +9,9 @@ import com.hongtian.service.PztRyRlzpjlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  * 人员人脸抓拍记录 服务实现类
@@ -31,5 +34,13 @@ public class PztRyRlzpjlServiceImpl extends ServiceImpl<PztRyRlzpjlMapper, PztRy
         query.orderByAsc("jlsj");
         Page<PztRyRlzpjl> pztClCrjlPage = pztRyRlzpjlMapper.selectPage(page, query);
         return pztClCrjlPage;
+    }
+
+    @Override
+    public List<PztRyRlzpjl> getZpjlByFaceId(String faceId) {
+        QueryWrapper query = new QueryWrapper();
+        query.eq("faceid",faceId);
+        List list = pztRyRlzpjlMapper.selectList(query);
+        return list.size() > 0 ? (List<PztRyRlzpjl>) list : new ArrayList<>();
     }
 }

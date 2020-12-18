@@ -6,20 +6,20 @@ package com.hongtian.schedule;
  * @description 间隔时间组
  */
 public enum  JobProcessorIntervalTime {
-    ONE_MINUTES("一分钟",1), //一分钟
-    TEN_MINUTES("十分钟",10), //十分钟
-    HALF_HOUR("半小时",30),   //半小时
-    ONT_HOUR("一小时",60),     //一小时
-    ZORE("二十四点",0);        // 零点
+    ONE_MINUTES("一分钟","0 */1 * * * ?"), //一分钟
+    TEN_MINUTES("十分钟","0 */10  * * * ?"), //十分钟
+    HALF_HOUR("半小时","0 */30  * * * ?"),   //半小时
+    ONT_HOUR("一小时","0 0 */1 * * ?"),     //一小时
+    ZORE("二十四点","0 0 0 * * ?");        // 零点
 
-    JobProcessorIntervalTime(String name,int interval) {
+    JobProcessorIntervalTime(String name,String interval) {
         this.interval = interval;
         this.name = name;
     }
     // 名称
     private String name;
     // 间隔
-    private int interval;
+    private String interval;
 
     public String getName() {
         return name;
@@ -29,11 +29,11 @@ public enum  JobProcessorIntervalTime {
         this.name = name;
     }
 
-    public int getInterval() {
+    public String getInterval() {
         return interval;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(String interval) {
         this.interval = interval;
     }
 }

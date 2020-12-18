@@ -32,7 +32,7 @@ public class SystemInfo {
         map.put("clJlCount",clJlCount);
         map.put("rlJlCount",rlJlCount);
         map.put("freeSpace",file.length()/(1024*1024)/1024 + "G");
-        map.put("totalSpace",file.getTotalSpace()/(1024*1024)/1024 + "G");
+        map.put("totalSpace",file.getFreeSpace()/(1024*1024)/1024 + "G");
         return map;
     }
 }
