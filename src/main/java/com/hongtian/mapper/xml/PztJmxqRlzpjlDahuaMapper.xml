@@ -2,25 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hongtian.mapper.PztJmxqRlzpjlDahuaMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.hongtian.entity.PztJmxqRlzpjlDahua">
-        <result column="ID" property="id" />
-        <result column="LSID" property="lsid" />
-        <result column="SBBH" property="sbbh" />
-        <result column="IMGURL1" property="imgurl1" />
-        <result column="IMGURL2" property="imgurl2" />
-        <result column="GMSFHM" property="gmsfhm" />
-        <result column="JLSJ" property="jlsj" />
-        <result column="JCBZ" property="jcbz" />
-        <result column="XSD" property="xsd" />
-        <result column="RID" property="rid" />
-        <result column="BL1" property="bl1" />
-        <result column="BL2" property="bl2" />
-    </resultMap>
+    <select id="getUnHandleList" resultType="com.hongtian.entity.PztJmxqRlzpjlDahua">
+        select * from nbdh.pzt_jmxq_rlzpjl where
+        (clbz = '0' or clbz is null) and rownum &lt;= 1000
+    </select>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        ID, LSID, SBBH, IMGURL1, IMGURL2, GMSFHM, JLSJ, JCBZ, XSD, RID, BL1, BL2
-    </sql>
+    <select id="getUnHandleListByStart" resultType="com.hongtian.entity.PztJmxqRlzpjlDahua">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        TMP.*,
+        ROWNUM ROW_ID
+        FROM
+        (
+            select * from nbdh.pzt_jmxq_rlzpjl where
+             rownum &lt;= #{end,jdbcType=INTEGER} and clbz = '0'
+        ) TMP
+        WHERE
+        ROWNUM &lt;= #{end,jdbcType=INTEGER}
+        )
+        WHERE
+        ROW_ID > #{start,jdbcType=INTEGER}
+    </select>
 
 </mapper>

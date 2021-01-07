@@ -15,6 +15,8 @@ public interface Constant {
 
     // 系统配置- 启动的任务
     String START_TASK = "interval_start_task";
+    // 处理大华落地数据的区间
+    String DAHUA_LDSJ_HANDLE_START_TIME= "dahua_ldsj_handle_start_time";
 
     /***************************************redis数据集名称***************************************/
     // 人脸抓拍落地数据

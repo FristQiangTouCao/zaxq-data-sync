@@ -1,12 +1,15 @@
 package com.hongtian.component;
 
-import com.hongtian.dao.redisDao.PztJcssJbRedisDao;
-import com.hongtian.dao.redisDao.PztRyJbRedisDao;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hongtian.dao.redisDao.RlzpjlRedisDao;
 import com.hongtian.entity.*;
+import com.hongtian.mapper.PztJmxqRlzpjlDahuaBackMapper;
 import com.hongtian.schedule.processor.PztRlzpldProcessor;
+import com.hongtian.service.PztJcssJbService;
 import com.hongtian.service.PztJmxqRlzpjlDahuaService;
+import com.hongtian.service.PztRyJbService;
 import com.hongtian.service.PztRyRlzpjlService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -23,29 +26,33 @@ public class PztJmxqRlzpjlLdOperator implements Runnable{
 
     private RlzpjlRedisDao rlzpjlRedisDao;
 
-    private PztRyJbRedisDao pztRyJbRedisDao;
 
-    private PztJcssJbRedisDao pztJcssJbRedisDao;
 
     private PztRyRlzpjlService pztRyRlzpjlService;
 
     private PztJmxqRlzpjlDahuaService pztJmxqRlzpjlDahuaService;
 
+    private PztRyJbService pztRyJbService;
+
     private SjClLog sjClLog;
 
     private PztRlzpldProcessor pztRlzpldProcessor;
+    PztJcssJbService pztJcssJbService;
+    private PztJmxqRlzpjlDahuaBackMapper pztJmxqRlzpjlDahuaBackMapper;
 
-    public PztJmxqRlzpjlLdOperator(RlzpjlRedisDao rlzpjlRedisDao, PztRyJbRedisDao pztRyJbRedisDao,
-                                   PztJcssJbRedisDao pztJcssJbRedisDao, PztRyRlzpjlService pztRyRlzpjlService,
+
+    public PztJmxqRlzpjlLdOperator(RlzpjlRedisDao rlzpjlRedisDao, PztRyRlzpjlService pztRyRlzpjlService,
                                    PztJmxqRlzpjlDahuaService pztJmxqRlzpjlDahuaService, SjClLog sjClLog,
-                                           PztRlzpldProcessor pztRlzpldProcessor) {
+                                   PztRlzpldProcessor pztRlzpldProcessor, PztRyJbService pztRyJbService,
+                                   PztJcssJbService pztJcssJbService,PztJmxqRlzpjlDahuaBackMapper pztJmxqRlzpjlDahuaBackMapper) {
         this.rlzpjlRedisDao = rlzpjlRedisDao;
-        this.pztRyJbRedisDao = pztRyJbRedisDao;
-        this.pztJcssJbRedisDao = pztJcssJbRedisDao;
         this.pztRyRlzpjlService = pztRyRlzpjlService;
         this.pztJmxqRlzpjlDahuaService = pztJmxqRlzpjlDahuaService;
         this.sjClLog = sjClLog;
         this.pztRlzpldProcessor = pztRlzpldProcessor;
+        this.pztRyJbService = pztRyJbService;
+        this.pztJcssJbService =pztJcssJbService;
+        this.pztJmxqRlzpjlDahuaBackMapper = pztJmxqRlzpjlDahuaBackMapper;
     }
 
     @Override
@@ -61,7 +68,7 @@ public class PztJmxqRlzpjlLdOperator implements Runnable{
                List<PztRyRlzpjl> pztRyRlzpjls = pztRyRlzpjlService.getZpjlByFaceId(item.getLsid());
                if(CollectionUtils.isEmpty(pztRyRlzpjls)) {
                    // 根据设施编号  去基础设施表找
-                   if(!pztJcssJbRedisDao.contains(item.getSbbh())) {
+                   if(!pztJcssJbService.existsJcss(item.getSbbh())) {
                        item.setClbz("2");
                    } else {
                        item.setClbz("3");
@@ -72,21 +79,36 @@ public class PztJmxqRlzpjlLdOperator implements Runnable{
                        item.setClbz("9");
                    } else{
                        //根据身份证号码人员基本表中查看
-                       String xm = pztRyJbRedisDao.get(gmsfhm);
-                       if(xm != null) {
-                           pztRyRlzpjls.forEach(ryRlzpjl -> {
-                               if("1".equals(ryRlzpjl.getLdbz())) return;
-                               ryRlzpjl.setXm(xm);
-                               ryRlzpjl.setLdbz("1");
-                               pztRyRlzpjlService.updateById(ryRlzpjl);
-                           });
-                       }
+                       PztRyJb pztRyJb = pztRyJbService.matchByGmsfzhm(gmsfhm);
+                       pztRyRlzpjls.forEach(ryRlzpjl -> {
+                           if("1".equals(ryRlzpjl.getLdbz())) return;
+                           if(pztRyJb != null) {
+                               ryRlzpjl.setXm(pztRyJb.getXm());
+                           }
+                           ryRlzpjl.setGmsfhm(gmsfhm);
+                           ryRlzpjl.setLdbz("1");
+                           pztRyRlzpjlService.updateById(ryRlzpjl);
+                       });
                        item.setClbz("1");
                    }
                }
-               pztJmxqRlzpjlDahuaService.updateById(item);
+//               pztJmxqRlzpjlDahuaService.updateByLsid(item);
+               PztJmxqRlzpjlDahuaBack pztJmxqRlzpjlDahuaBack = new PztJmxqRlzpjlDahuaBack();
+               BeanUtils.copyProperties(item, pztJmxqRlzpjlDahuaBack);
+               savePztRyrlzpjl(pztJmxqRlzpjlDahuaBack);
+               // 删除
+               pztJmxqRlzpjlDahuaService.remove(new QueryWrapper<PztJmxqRlzpjlDahua>().eq("lsid",item.getLsid()));
            });
            pztRlzpldProcessor.updateLog(sjClLog.getId(),list.size());
        }
+    }
+
+    public void savePztRyrlzpjl(PztJmxqRlzpjlDahuaBack pztJmxqRlzpjlDahuaBack) {
+        try{
+            // 备份
+            pztJmxqRlzpjlDahuaBackMapper.insert(pztJmxqRlzpjlDahuaBack);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

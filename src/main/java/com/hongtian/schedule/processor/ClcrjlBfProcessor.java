@@ -36,7 +36,6 @@ public class ClcrjlBfProcessor extends BaseProcessor<PztClCrjl> {
 
     @Override
     public void execute(SjClLog SjClLog) {
-        boolean recordedTotal = false;
         while(true){
             // 获取记录
             Page<PztClCrjl> page  = pztClCrjlService.getUnHandleJl();
@@ -47,12 +46,10 @@ public class ClcrjlBfProcessor extends BaseProcessor<PztClCrjl> {
             // 备份记录
             pztClCrjlDao.insert(list);
             // 更新日志
-            if(!recordedTotal) {
-                SjClLog.setTotal((int)page.getTotal());
-                recordedTotal = true;
-            }
+            SjClLog.setTotal(SjClLog.getTotal() + list.size());
             SjClLog.setSuccessCount(SjClLog.getSuccessCount() + list.size());
             updateLog(SjClLog);
+            processorContext.processorUpdateTime(this);
         }
     }
 

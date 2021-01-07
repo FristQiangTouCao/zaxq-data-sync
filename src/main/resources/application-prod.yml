@@ -7,14 +7,14 @@ spring:
         pz:
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: oracle.jdbc.driver.OracleDriver # mysql的驱动你可以配置别的关系型数据库
-          url: jdbc:oracle:thin:@112.17.180.66:41521:orcl # 数据源地址
+          url: jdbc:oracle:thin:@(description=(address_list=(address=(host=10.119.1.248)(protocol=tcp)(port=1522))(address=(host=10.119.1.250)(protocol=tcp)(port=1522))(load_balance=yes)(failover=yes))(connect_data=(service_name=jwzh))) # 数据源地址
           username: pz2010 # 用户名
-          password: 123456 # 密码
+          password: pz2010123456 # 密码
         nbdh:
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: oracle.jdbc.driver.OracleDriver # mysql的驱动你可以配置别的关系型数据库
-          url: jdbc:oracle:thin:@112.17.180.66:41521:orcl # 数据源地址
-          username: pz2010 # 用户名
+          url: jdbc:oracle:thin:@41.204.5.126:1521:orcl # 数据源地址
+          username: zzrk2020 # 用户名
           password: 123456 # 密码
   #    filters: stat,wall,log4j,config
   #    max-active: 100
@@ -32,20 +32,20 @@ spring:
   #    max-pool-prepared-statement-per-connection-size: 20
   data:
     mongodb:
-      database: jl
-      host: 127.0.0.1
+      database: zaxq
+      host: 41.204.5.126
       port: 27017
-  #      password: ddggh004
-  #      username: root007
+      password: 123456zaxq
+      username: pzzaxq
   jpa:
     database: oracle
   # redis
   redis:
     database: 0
-    host: 127.0.0.1
-    port: 6397
-    password:
+    host:  41.204.5.126
+    port: 6379
+#    password: 123456zaxq
 server:
   port: 8501
 #数据卷目录
-dataDir: 'D:\\data\\mongo\\data'
+dataDir: 'Z:\\data\\mongo\\db\\data'

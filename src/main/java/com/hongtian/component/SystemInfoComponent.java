@@ -7,6 +7,7 @@ import com.hongtian.schedule.ProcessorContext;
 import com.hongtian.schedule.ProcessorDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.ListUtils;
 
 import java.util.*;
 
@@ -57,7 +58,10 @@ public class SystemInfoComponent {
             todayTaskInfoVo.setRunning(definition.isRunning());
             todayTaskInfoVo.setLastRunningTime(definition.getLastRunningTime());
             todayTaskInfoVo.setRunningIntervalTime(job.getJobProcessorIntervalTime().getName());
+            todayTaskInfoVo.setStartTime(definition.getStartTime());
+            todayTaskInfoVo.setUpdateTime(definition.getUpdateTime());
         });
-        return list;
+        List<TodayTaskInfoVo> sort = ListUtils.sort(list);
+        return sort;
     }
 }

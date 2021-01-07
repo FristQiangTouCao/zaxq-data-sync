@@ -30,7 +30,8 @@ public class RlzpjlRedisDao {
     }
 
     public void insertList(List<PztJmxqRlzpjlDahua> list) {
-        redisTemplate.opsForList().leftPush(Constant.REDIS_RLZPLD,list);
+        ArrayList<PztJmxqRlzpjlDahua> pztJmxqRlzpjlDahuas = new ArrayList<>(list);
+        redisTemplate.opsForList().leftPush(Constant.REDIS_RLZPLD,pztJmxqRlzpjlDahuas);
     }
 
     // 取出人脸抓拍记录

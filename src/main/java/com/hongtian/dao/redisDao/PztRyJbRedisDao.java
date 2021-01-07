@@ -8,6 +8,7 @@ import com.hongtian.util.Constant;
 import com.hongtian.util.DateTimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -31,11 +32,15 @@ public class PztRyJbRedisDao {
     @Autowired
     private PztRyJbMapper pztRyJbMapper;
 
+    @Value("${start-redis-cache:false}")
+    private boolean startRedisCache;
+
     /**
      * 加载所有的人员数据
      */
     @PostConstruct
     public void init() {
+        if(!startRedisCache) return;
         QueryWrapper<PztRyJb> query = new QueryWrapper<>();
         if(size() > 0) {
             query.ge("cjsj", DateTimeUtils.addDays(DateTimeUtils.now(),-30));

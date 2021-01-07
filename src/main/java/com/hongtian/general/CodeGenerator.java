@@ -16,9 +16,7 @@ public class CodeGenerator {
 
     // 需要生成的表的名称
     private static String[] tables = {
-            "PZT_JMXQ_RLZPJL_DAHUA",
-            "PZT_JCSS_JB",
-            "PZT_RY_JB"
+            "PZT_JMXQ_SSGK"
     };
     //开启swagger
     private static boolean openSwagger = false;

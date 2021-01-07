@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>智安小区数据处理后台监控</title>
     <!-- 引入样式 -->
     <link rel="icon" href="/img/logo.icon" type="icon/x-ico" />
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/css/element.css">
     <style>
         h3{
             margin: 0;
@@ -16,7 +16,7 @@
 <body>
     <div id="app" v-cloak>
         <div v-cloak>
-            <h3 style="text-align:center">数据同步后台监控</h3>
+            <h3 style="text-align:center">智安小区数据处理后台监控</h3>
             <el-row  style="border: solid 1px black">
                 <el-col :span="12" style="padding:0 10px">
                     <h3 style="text-align:center;border-bottom: solid 1px black"><img src="/img/mongodb-logo.png" height="45" alt="mongo"></h3>
@@ -91,8 +91,22 @@
                         label="运行间隔">
                 </el-table-column>
                 <el-table-column
+                        prop="startTime"
+                        label="开始时间">
+                    <template slot-scope="scope">
+                        {{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(scope.row.startTime))}}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="updateTime"
+                        label="更新时间">
+                    <template slot-scope="scope">
+                        {{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(scope.row.updateTime))}}
+                    </template>
+                </el-table-column>
+                <el-table-column
                         prop="lastRunningTime"
-                        label="最后一次运行时间">
+                        label="结束时间">
                     <template slot-scope="scope">
                         {{dateFormat('YYYY-mm-dd HH:MM:SS',new Date(scope.row.lastRunningTime))}}
                     </template>
@@ -103,7 +117,7 @@
 </body>
 <script src="/js/vue.min.js"></script>
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="/js/element.js"></script>
 <script th:inline="javascript">
     new Vue({
         el: '#app',

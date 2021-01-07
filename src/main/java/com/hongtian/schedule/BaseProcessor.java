@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public abstract class BaseProcessor<T> {
 
     @Autowired
-    private ProcessorContext processorContext;
+    protected ProcessorContext processorContext;
 
     // 启动时间
     protected long startTime;

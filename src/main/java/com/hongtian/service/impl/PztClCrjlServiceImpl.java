@@ -1,6 +1,5 @@
 package com.hongtian.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hongtian.entity.PztClCrjl;
@@ -27,11 +26,8 @@ public class PztClCrjlServiceImpl extends ServiceImpl<PztClCrjlMapper, PztClCrjl
     @Override
     public Page<PztClCrjl> getUnHandleJl() {
         Page<PztClCrjl> page = new Page<PztClCrjl>(getPage(),getSize());
-        QueryWrapper<PztClCrjl> query = new QueryWrapper<PztClCrjl>();
-        query.ne("clbz","1").or().isNull("clbz");
-        query.orderByAsc("jlsj");
-        Page<PztClCrjl> pztClCrjlPage = pztClCrjlMapper.selectPage(page, query);
-        return pztClCrjlPage;
+        page.setRecords(pztClCrjlMapper.getUnHandleData());
+        return page;
     }
 }
 

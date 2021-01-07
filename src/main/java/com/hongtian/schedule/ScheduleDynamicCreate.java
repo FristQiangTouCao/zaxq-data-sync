@@ -1,12 +1,16 @@
 package com.hongtian.schedule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 /**
  * @author weed
@@ -23,6 +27,10 @@ public class ScheduleDynamicCreate implements SchedulingConfigurer {
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         processorContext.init();
         List<JobProcessorIntervalTime> intervalTimes = processorContext.processorIntervalTimes;
+        // 定时更新开启的任务列表
+        scheduledTaskRegistrar.addCronTask(() -> {
+            processorContext.loadStartTasks();
+        },"0 */1 * * * ?");
         intervalTimes.forEach(item -> {
             scheduledTaskRegistrar.addCronTask(() -> {
                 List<ProcessorDefinition> processorDefinitions = processorContext.processorByGroup.get(item);
@@ -48,8 +56,24 @@ public class ScheduleDynamicCreate implements SchedulingConfigurer {
                 });
             },item.getInterval());
         });
-        scheduledTaskRegistrar.addCronTask(() -> {
-            processorContext.loadStartTasks();
-        },"0 */1 * * * ?");
+
+    }
+
+
+    public void configurationTask(ScheduledTaskRegistrar taskRegistrar) {
+        Method[] methods = BatchProperties.Job.class.getMethods();
+        int defaultPoolSize = 3;
+        int corePoolSize = 0;
+        if (methods != null && methods.length > 0) {
+            for (Method method : methods) {
+                Scheduled annotation = method.getAnnotation(Scheduled.class);
+                if (annotation != null) {
+                    corePoolSize++;
+                }
+            }
+            if (defaultPoolSize > corePoolSize)
+                corePoolSize = defaultPoolSize;
+        }
+        taskRegistrar.setScheduler(Executors.newScheduledThreadPool(corePoolSize));
     }
 }

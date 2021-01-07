@@ -1,12 +1,9 @@
 package com.hongtian.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -19,7 +16,7 @@ import org.springframework.data.annotation.Id;
  */
 @Data
 @TableName("PZT_CL_CRJL")
-public class PztClCrjl extends Model<PztClCrjl> {
+public class PztClCrjl{
 
     private static final long serialVersionUID = 1L;
 
@@ -236,11 +233,4 @@ public class PztClCrjl extends Model<PztClCrjl> {
 
     @TableField("SSLX")
     private String sslx;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.nbbh;
-    }
-
 }

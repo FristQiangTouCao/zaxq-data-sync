@@ -29,11 +29,12 @@ public class PztRyRlzpjlServiceImpl extends ServiceImpl<PztRyRlzpjlMapper, PztRy
     @Override
     public Page<PztRyRlzpjl> getUnHandleJl() {
         Page<PztRyRlzpjl> page = new Page<PztRyRlzpjl>(getPage(),getSize());
-        QueryWrapper<PztRyRlzpjl> query = new QueryWrapper<PztRyRlzpjl>();
-        query.ne("clbz","1").or().isNull("clbz");
-        query.orderByAsc("jlsj");
-        Page<PztRyRlzpjl> pztClCrjlPage = pztRyRlzpjlMapper.selectPage(page, query);
-        return pztClCrjlPage;
+        page.setRecords(pztRyRlzpjlMapper.getUnHandleData());
+//        QueryWrapper<PztRyRlzpjl> query = new QueryWrapper<PztRyRlzpjl>();
+//        query.ne("clbz","1").or().isNull("clbz");
+//        query.orderByAsc("jlsj");
+//        Page<PztRyRlzpjl> pztClCrjlPage = pztRyRlzpjlMapper.selectPage(page, query);
+        return page;
     }
 
     @Override

@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PztRyJbService extends IService<PztRyJb> {
 
+    PztRyJb matchByGmsfzhm(String gmsfzhm);
 }

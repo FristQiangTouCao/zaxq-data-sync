@@ -19,8 +19,8 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("nbdh.PZT_JMXQ_RLZPJL")
-public class PztJmxqRlzpjlDahua extends Model<PztJmxqRlzpjlDahua> {
+@TableName("nbdh.PZT_JMXQ_RLZPJL_BACK")
+public class PztJmxqRlzpjlDahuaBack extends Model<PztJmxqRlzpjlDahuaBack> {
 
     private static final long serialVersionUID = 1L;
 

@@ -131,13 +131,26 @@ public class ProcessorContext implements ApplicationContextAware {
         ProcessorDefinition definition = processorDefinitions.get(baseProcessor.getType());
         if(definition != null) {
             definition.setRunning(true);
+            definition.setStartTime(System.currentTimeMillis());
+            definition.setUpdateTime(System.currentTimeMillis());
         }
     }
+
+    // 任务执行结束，更新执行时间
     public void processorEnd(BaseProcessor baseProcessor) {
         ProcessorDefinition definition = processorDefinitions.get(baseProcessor.getType());
         if(definition != null) {
             definition.setRunning(false);
             definition.setLastRunningTime(System.currentTimeMillis());
+            definition.setUpdateTime(System.currentTimeMillis());
+        }
+    }
+
+    public void processorUpdateTime(BaseProcessor baseProcessor) {
+        ProcessorDefinition definition = processorDefinitions.get(baseProcessor.getType());
+        if(definition != null) {
+            definition.setLastRunningTime(System.currentTimeMillis());
+            definition.setUpdateTime(System.currentTimeMillis());
         }
     }
 

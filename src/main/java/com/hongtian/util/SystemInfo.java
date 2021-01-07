@@ -1,5 +1,7 @@
 package com.hongtian.util;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,8 +33,9 @@ public class SystemInfo {
         map.put("rlRunningCount",rlRunningCount);
         map.put("clJlCount",clJlCount);
         map.put("rlJlCount",rlJlCount);
-        map.put("freeSpace",file.length()/(1024*1024)/1024 + "G");
-        map.put("totalSpace",file.getFreeSpace()/(1024*1024)/1024 + "G");
+        long size = FileUtils.sizeOfDirectory(file);
+        map.put("freeSpace",NumberUtils.division(size,1024*1024*1024,2) + "G");
+        map.put("totalSpace",NumberUtils.division(file.getFreeSpace(),1024*1024*1024,2) + "G");
         return map;
     }
 }

@@ -30,4 +30,10 @@ public class ProcessorDefinition {
 
     // 最近一次运行的时间
     private long lastRunningTime;
+
+    // 开始时间
+    private long startTime;
+
+    // 更新时间
+    private long updateTime;
 }

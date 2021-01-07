@@ -27,7 +27,11 @@ public abstract class BaseDao<T> {
     }
 
     public void save(T t,String collectionName){
-        mongoTemplate.save(t,collectionName);
+        try {
+            mongoTemplate.save(t,collectionName);
+        } catch (Exception e) {
+            System.out.println("2222");
+        }
     }
 
     public void save(T t){

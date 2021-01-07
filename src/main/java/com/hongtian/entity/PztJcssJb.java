@@ -1,13 +1,14 @@
 package com.hongtian.entity;
 
-import java.math.BigDecimal;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -306,9 +307,6 @@ public class PztJcssJb extends Model<PztJcssJb> {
 
     @TableField("SBBZ")
     private String sbbz;
-
-    @TableField("CLSJ")
-    private String clsj;
 
     @TableField("ZHLSSJ")
     private String zhlssj;

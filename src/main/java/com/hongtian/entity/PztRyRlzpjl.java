@@ -1,10 +1,8 @@
 package com.hongtian.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("PZT_RY_RLZPJL")
-public class PztRyRlzpjl extends Model<PztRyRlzpjl> {
+public class PztRyRlzpjl {
 
     private static final long serialVersionUID = 1L;
 
@@ -283,11 +281,5 @@ public class PztRyRlzpjl extends Model<PztRyRlzpjl> {
 
     @TableField("DTYPE")
     private String dtype;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.nbbh;
-    }
 
 }

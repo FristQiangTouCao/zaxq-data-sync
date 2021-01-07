@@ -7,6 +7,7 @@ import com.hongtian.mapper.PztJcssJbMapper;
 import com.hongtian.util.Constant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -30,11 +31,15 @@ public class PztJcssJbRedisDao {
     @Autowired
     private PztJcssJbMapper pztJcssJbMapper;
 
+    @Value("${start-redis-cache:false}")
+    private boolean startRedisCache;
+
     /**
      * 加载人脸设备和一体机的基本信息
      */
     @PostConstruct
     public void init() {
+        if(!startRedisCache) return;
         int page = 0,size = 10000;
         QueryWrapper query = new QueryWrapper();
         query.in("sslx","SS18","SS20");

@@ -30,7 +30,7 @@ public class PztRyrlzpjlDao extends BaseDao<PztRyRlzpjl>{
                 if(collectionsName != null){
                     ryRlzpjls.parallelStream().forEach(item -> {
                         try{
-                            save(item,collectionsName);
+                            saveLock(item,collectionsName);
                             item.setXgsj(DateTimeUtils.now());
                             item.setClbz("1");
                             pztRyRlzpjlMapper.updateById(item);
@@ -41,6 +41,12 @@ public class PztRyrlzpjlDao extends BaseDao<PztRyRlzpjl>{
                 }
             }
         }catch (Exception e){
+        }
+    }
+
+    public void saveLock(PztRyRlzpjl item,String collectionsName) {
+        synchronized (PztRyrlzpjlDao.class){
+            save(item,collectionsName);
         }
     }
 }

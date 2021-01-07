@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-12-15
  */
 public interface PztJcssJbService extends IService<PztJcssJb> {
-
+    boolean existsJcss(String ssbh);
 }

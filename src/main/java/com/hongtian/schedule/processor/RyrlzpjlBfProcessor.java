@@ -27,7 +27,7 @@ public class RyrlzpjlBfProcessor extends BaseProcessor<PztRyRlzpjl> {
     private PztRyrlzpjlDao pztRyrlzpjlDao;
     @Override
     public Job getType() {
-        return Job.RY_LZPJL_BACK;
+        return Job.RY_RLZPJL_BACK;
     }
 
 
@@ -48,12 +48,10 @@ public class RyrlzpjlBfProcessor extends BaseProcessor<PztRyRlzpjl> {
             // 备份记录
             pztRyrlzpjlDao.insert(list);
             // 更新日志
-            if(!recordedTotal) {
-                SjClLog.setTotal((int)page.getTotal());
-                recordedTotal = true;
-            }
+            SjClLog.setTotal(SjClLog.getTotal() + list.size());
             SjClLog.setSuccessCount(SjClLog.getSuccessCount() + list.size());
             updateLog(SjClLog);
+            processorContext.processorUpdateTime(this);
         }
     }
 }

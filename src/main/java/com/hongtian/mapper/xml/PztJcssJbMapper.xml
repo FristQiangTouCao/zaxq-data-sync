@@ -2,91 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hongtian.mapper.PztJcssJbMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.hongtian.entity.PztJcssJb">
-        <id column="NBBH" property="nbbh" />
-        <result column="SSBH" property="ssbh" />
-        <result column="SSLX" property="sslx" />
-        <result column="SSXQ" property="ssxq" />
-        <result column="SSDZ" property="ssdz" />
-        <result column="FWDZBM" property="fwdzbm" />
-        <result column="SXMS" property="sxms" />
-        <result column="ZDGZBZ" property="zdgzbz" />
-        <result column="SSZT" property="sszt" />
-        <result column="ZJJCR" property="zjjcr" />
-        <result column="ZJJCXQ" property="zjjcxq" />
-        <result column="ZJJCSJ" property="zjjcsj" />
-        <result column="XCJCSJ" property="xcjcsj" />
-        <result column="JLR" property="jlr" />
-        <result column="JLXQ" property="jlxq" />
-        <result column="JLSJ" property="jlsj" />
-        <result column="ZXR" property="zxr" />
-        <result column="ZXXQ" property="zxxq" />
-        <result column="ZXYY" property="zxyy" />
-        <result column="ZXSJ" property="zxsj" />
-        <result column="WEBURL" property="weburl" />
-        <result column="BZ" property="bz" />
-        <result column="GLM" property="glm" />
-        <result column="CJR" property="cjr" />
-        <result column="CJRIP" property="cjrip" />
-        <result column="CJSJ" property="cjsj" />
-        <result column="XGR" property="xgr" />
-        <result column="XGRIP" property="xgrip" />
-        <result column="XGSJ" property="xgsj" />
-        <result column="YXBZ" property="yxbz" />
-        <result column="FSBZ" property="fsbz" />
-        <result column="CLBZ" property="clbz" />
-        <result column="X" property="x" />
-        <result column="Y" property="y" />
-        <result column="Z" property="z" />
-        <result column="ZRQ" property="zrq" />
-        <result column="LXR" property="lxr" />
-        <result column="LXDH" property="lxdh" />
-        <result column="CJRJH" property="cjrjh" />
-        <result column="CJRXQ" property="cjrxq" />
-        <result column="CJRZRQ" property="cjrzrq" />
-        <result column="XGRJH" property="xgrjh" />
-        <result column="XGRXQ" property="xgrxq" />
-        <result column="XGRZRQ" property="xgrzrq" />
-        <result column="SSMC" property="ssmc" />
-        <result column="JZWDZBM" property="jzwdzbm" />
-        <result column="JLXMC" property="jlxmc" />
-        <result column="JLXDM" property="jlxdm" />
-        <result column="GXMJJH" property="gxmjjh" />
-        <result column="GXMJ" property="gxmj" />
-        <result column="GXDW" property="gxdw" />
-        <result column="THIRDID" property="thirdid" />
-        <result column="JMXQBH" property="jmxqbh" />
-        <result column="LXRGMSFHM" property="lxrgmsfhm" />
-        <result column="SBBZ" property="sbbz" />
-        <result column="CLSJ" property="clsj" />
-        <result column="ZHLSSJ" property="zhlssj" />
-        <result column="TDBM" property="tdbm" />
-        <result column="SFZHAF" property="sfzhaf" />
-        <result column="JGID" property="jgid" />
-        <result column="PCR" property="pcr" />
-        <result column="PCRJH" property="pcrjh" />
-        <result column="PCSJ" property="pcsj" />
-        <result column="PCBZ" property="pcbz" />
-        <result column="JCBZ" property="jcbz" />
-        <result column="JMXQMC3" property="jmxqmc3" />
-        <result column="JMXQMC2" property="jmxqmc2" />
-        <result column="JMXQMC" property="jmxqmc" />
-        <result column="PPXH" property="ppxh" />
-        <result column="IPDZ" property="ipdz" />
-        <result column="WLDKH" property="wldkh" />
-        <result column="XZQHDM" property="xzqhdm" />
-        <result column="CSDM" property="csdm" />
-        <result column="SXJWZLX" property="sxjwzlx" />
-        <result column="SJLY" property="sjly" />
-        <result column="YCBZ" property="ycbz" />
-        <result column="SQXCBH" property="sqxcbh" />
-        <result column="SFKBFSP" property="sfkbfsp" />
-    </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        NBBH, SSBH, SSLX, SSXQ, SSDZ, FWDZBM, SXMS, ZDGZBZ, SSZT, ZJJCR, ZJJCXQ, ZJJCSJ, XCJCSJ, JLR, JLXQ, JLSJ, ZXR, ZXXQ, ZXYY, ZXSJ, WEBURL, BZ, GLM, CJR, CJRIP, CJSJ, XGR, XGRIP, XGSJ, YXBZ, FSBZ, CLBZ, X, Y, Z, ZRQ, LXR, LXDH, CJRJH, CJRXQ, CJRZRQ, XGRJH, XGRXQ, XGRZRQ, SSMC, JZWDZBM, JLXMC, JLXDM, GXMJJH, GXMJ, GXDW, THIRDID, JMXQBH, LXRGMSFHM, SBBZ, CLSJ, ZHLSSJ, TDBM, SFZHAF, JGID, PCR, PCRJH, PCSJ, PCBZ, JCBZ, JMXQMC3, JMXQMC2, JMXQMC, PPXH, IPDZ, WLDKH, XZQHDM, CSDM, SXJWZLX, SJLY, YCBZ, SQXCBH, SFKBFSP
-    </sql>
+    <select id="cllstj" resultType="com.hongtian.entity.dto.JcssGkVo">
+        select sbbh,sslx,count(1) as count from PZT_CL_CRJL where
+        jlsj between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+        and sslx in
+        <foreach item="item" index="index" collection="sslxs"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        group by sslx,sbbh
+    </select>
 
+    <select id="rllstj" resultType="com.hongtian.entity.dto.JcssGkVo">
+        select sbbh,sslx,count(1) as count from PZT_CL_CRJL where
+        jlsj between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+        and sslx in
+        <foreach item="item" index="index" collection="sslxs"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        group by sslx,sbbh
+    </select>
+
+    <update id="updateYcSbTargetClean">
+        update pzt_jcss_jb set ycbz = '0' where ycbz = '1'
+    </update>
+
+    <update id="updateYcSbTarget">
+        update pzt_jcss_jb jb set ycbz = '1' where yxbz = '1' and exists(select 1 from PZT_JMXQ_YCYJ yc where jb.nbbh=yc.ywbzj and yc.dxlx = 'sb' and yc.stlx='SS18' and yc.YCBZ = '1')
+    </update>
 </mapper>

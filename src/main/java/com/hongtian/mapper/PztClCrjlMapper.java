@@ -5,6 +5,8 @@ import com.hongtian.entity.PztClCrjl;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  * 车辆出入记录 Mapper 接口
@@ -16,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @DS("pz")
 public interface PztClCrjlMapper extends BaseMapper<PztClCrjl> {
-
+    List<PztClCrjl> getUnHandleData();
 }

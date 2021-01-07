@@ -2,11 +2,9 @@ package com.hongtian;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
-import com.hongtian.schedule.BaseProcessor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,15 +12,12 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import java.util.Map;
-
 @SpringBootApplication
 @MapperScan("com.hongtian.mapper")
 @EnableScheduling
 public class App {
     public static void main(String[] args) {
-        ConfigurableApplicationContext run = SpringApplication.run(App.class);
-        Map<String, BaseProcessor> beansOfType = run.getBeansOfType(BaseProcessor.class);System.out.println(beansOfType);
+        SpringApplication.run(App.class);
 
     }
 
