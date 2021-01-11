@@ -9,6 +9,7 @@ import com.hongtian.service.PztJcssJbService;
 import com.hongtian.service.PztJmxqRlzpjlDahuaService;
 import com.hongtian.service.PztRyJbService;
 import com.hongtian.service.PztRyRlzpjlService;
+import com.hongtian.util.DateTimeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -105,6 +106,7 @@ public class PztJmxqRlzpjlLdOperator implements Runnable{
 
     public void savePztRyrlzpjl(PztJmxqRlzpjlDahuaBack pztJmxqRlzpjlDahuaBack) {
         try{
+            pztJmxqRlzpjlDahuaBack.setBackTime(DateTimeUtils.now());
             // 备份
             pztJmxqRlzpjlDahuaBackMapper.insert(pztJmxqRlzpjlDahuaBack);
         }catch (Exception e) {

@@ -62,7 +62,7 @@ public class ScheduleDynamicCreate implements SchedulingConfigurer {
 
     public void configurationTask(ScheduledTaskRegistrar taskRegistrar) {
         Method[] methods = BatchProperties.Job.class.getMethods();
-        int defaultPoolSize = 3;
+        int defaultPoolSize = 10;
         int corePoolSize = 0;
         if (methods != null && methods.length > 0) {
             for (Method method : methods) {

@@ -63,6 +63,9 @@ public class PztJmxqRlzpjlDahuaBack extends Model<PztJmxqRlzpjlDahuaBack> {
     @TableField("CLBZ")
     private String clbz;
 
+    @TableField("BACKTIME")
+    private String backTime;
+
 
     @Override
     protected Serializable pkVal() {

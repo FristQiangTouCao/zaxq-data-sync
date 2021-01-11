@@ -33,6 +33,7 @@ public class PztRyrlzpjlSupplement {
     @Autowired
     private RlzpjlRedisDao rlzpjlRedisDao;
 
+
     @Scheduled(cron = "*/10 * * * * ?")
     public void supplement() {
         load();

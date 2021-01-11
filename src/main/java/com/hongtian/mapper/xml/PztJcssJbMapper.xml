@@ -15,7 +15,7 @@
     </select>
 
     <select id="rllstj" resultType="com.hongtian.entity.dto.JcssGkVo">
-        select sbbh,sslx,count(1) as count from PZT_CL_CRJL where
+        select sbbh,sslx,count(1) as count from PZT_RY_RLZPJL where
         jlsj between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
         and sslx in
         <foreach item="item" index="index" collection="sslxs"

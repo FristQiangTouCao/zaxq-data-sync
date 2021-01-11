@@ -58,21 +58,21 @@ public class JcssGkTjOperator {
         }};
 //       车辆出入记录
         List<JcssGkVo> cllstj = pztJcssJbMapper.cllstj(zlcl, dqrq+"000000", jlsj2);
-        logger.warn("车辆流水设备个数：{} start。",zlcl.size());
+        logger.warn("车辆流水设备个数：{} start。dqrq：{}",zlcl.size(),dqrq);
         cllstj.forEach(item -> {
             try{
                 String sbbh = item.getSbbh();
                 if(StringUtils.isBlank(sbbh)) {
                     return;
                 }
-                logger.warn("车辆设备---->：sbbh:{},sslx:{},count:{}.",sbbh,item.getSslx(),item.getCount());
+                logger.warn("车辆设备---->：sbbh:{},sslx:{},count:{}.dqrq：{}",sbbh,item.getSslx(),item.getCount(),dqrq);
                 processJmxqSsgk(dqrq, sbbh, item.getCount().intValue(), item.getSslx(),true);
             }catch (Exception e) {
                 e.printStackTrace();
-                logger.error("设备概况统计，发生错误！车辆ssbh:{}",item.getSbbh());
+                logger.error("设备概况统计，发生错误！车辆ssbh:{},dqrq：{}",item.getSbbh(),dqrq);
             }
         });
-        logger.warn("车辆流水设备个数：{} end。",cllstj.size());
+        logger.warn("车辆流水设备个数：{} end。,dqrq：{}",cllstj.size(),dqrq);
 
 
 //        芝立人脸照片记录
@@ -80,21 +80,21 @@ public class JcssGkTjOperator {
             add("SS071"); add("SS072");add("SS074");add("SS075"); add("SS18");add("SS20");
         }};
         List<JcssGkVo> rllstj = pztJcssJbMapper.rllstj(zlry, dqrq+"000000", jlsj2);
-        logger.warn("人脸感知流水设备个数：{}，start。",zlry.size());
+        logger.warn("人脸感知流水设备个数：{}，start。dqrq：{}",zlry.size(),dqrq);
         rllstj.forEach(item -> {
             try{
                 String sbbh = item.getSbbh();
                 if(StringUtils.isBlank(sbbh)) {
                     return;
                 }
-                logger.error("人脸设备---->sbbh:{},sslx:{},count:{}.",sbbh,item.getSslx(),item.getCount());
+                logger.error("人脸设备---->sbbh:{},sslx:{},count:{}.dqrq：{}",sbbh,item.getSslx(),item.getCount(),dqrq);
                 processJmxqSsgk(dqrq, sbbh, item.getCount().intValue(), item.getSslx(),false);
             }catch (Exception e){
                 e.printStackTrace();
-                logger.error("设备概况统计，发生错误！人脸ssbh:{}",item.getSbbh());
+                logger.error("设备概况统计，发生错误！人脸ssbh:{},dqrq：{}",item.getSbbh(),dqrq);
             }
         });
-        logger.warn("人脸感知流水设备个数：{}，end。",rllstj.size());
+        logger.warn("人脸感知流水设备个数：{}，end。dqrq：{}",rllstj.size(),dqrq);
         List<PztJmxqSsgk> pztJmxqSsgkList = pztJmxqSsgkService.list(
                 new QueryWrapper<PztJmxqSsgk>()
                 .eq("sslx","SS18")
@@ -136,7 +136,7 @@ public class JcssGkTjOperator {
                     // 计算落地数据的各项比率
                     item.computeGroundDate();
                     pztJmxqSsgkService.updateById(item);
-                    logger.warn("更新设备的落地数据,ssbh:{},sslx:{}.",pztJcssJb.getSsbh(),pztJcssJb.getSslx());
+                    logger.warn("更新设备的落地数据,ssbh:{},sslx:{}.dqrq：{}",pztJcssJb.getSsbh(),pztJcssJb.getSslx(),dqrq);
                 }
             } catch (Exception e) {
                 logger.error("计算落地数据错误：", e.getMessage());
