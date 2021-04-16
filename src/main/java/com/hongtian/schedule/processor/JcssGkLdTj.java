@@ -54,7 +54,7 @@ public class JcssGkLdTj extends BaseProcessor<PztJcssJb> {
         );
         log.warn("开始更新落地数据：drqp:{}.date:{}.",dqrq,new Date());
         while(true) {
-            Page<PztJmxqSsgk> ssgkPage = new Page<>();
+            Page<PztJmxqSsgk> ssgkPage = new Page<>(page,size);
             Page<PztJmxqSsgk> result = pztJmxqSsgkService.page(ssgkPage, new QueryWrapper<PztJmxqSsgk>()
                     .eq("sslx", "SS18")
                     .eq("tjrq", dqrq)
