@@ -6,9 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hongtian.entity.PztJmxqRlzpjlDahua;
 import com.hongtian.mapper.PztJmxqRlzpjlDahuaMapper;
 import com.hongtian.service.PztJmxqRlzpjlDahuaService;
+import com.hongtian.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -44,7 +47,16 @@ public class PztJmxqRlzpjlDahuaServiceImpl extends ServiceImpl<PztJmxqRlzpjlDahu
 
     @Override
     public int getUnHandleCount() {
-        return pztJmxqRlzpjlDahuaMapper.selectCount(new QueryWrapper<PztJmxqRlzpjlDahua>().eq("clbz","-1"));
+        // 获取当天的0点
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Long time = null;
+        try {
+             time = sdf.parse(DateTimeUtils.today() + "000000").getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return pztJmxqRlzpjlDahuaMapper.selectCount(new QueryWrapper<PztJmxqRlzpjlDahua>().eq("clbz","-1")
+                .le("jlsj",time));
     }
 
 

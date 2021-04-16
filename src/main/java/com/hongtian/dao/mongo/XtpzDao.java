@@ -27,4 +27,8 @@ public class XtpzDao extends BaseDao<XtPz> {
         return mongoTemplate.findOne(query, XtPz.class);
     }
 
+    public void update(XtPz xtPz) {
+        mongoTemplate.save(xtPz);
+    }
+
 }

@@ -1,7 +1,8 @@
 package com.hongtian.mapper;
 
-import com.hongtian.entity.PztRyJb;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hongtian.entity.PztRyJb;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author weed
  * @since 2020-12-15
  */
+@DS("pz")
 public interface PztRyJbMapper extends BaseMapper<PztRyJb> {
 
 }

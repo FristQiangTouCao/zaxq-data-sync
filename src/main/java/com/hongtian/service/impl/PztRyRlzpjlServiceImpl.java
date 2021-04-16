@@ -26,6 +26,8 @@ public class PztRyRlzpjlServiceImpl extends ServiceImpl<PztRyRlzpjlMapper, PztRy
     @Autowired
     private PztRyRlzpjlMapper pztRyRlzpjlMapper;
 
+    private boolean open = false;
+
     @Override
     public Page<PztRyRlzpjl> getUnHandleJl() {
         Page<PztRyRlzpjl> page = new Page<PztRyRlzpjl>(getPage(),getSize());
@@ -43,5 +45,15 @@ public class PztRyRlzpjlServiceImpl extends ServiceImpl<PztRyRlzpjlMapper, PztRy
         query.eq("faceid",faceId);
         List list = pztRyRlzpjlMapper.selectList(query);
         return list.size() > 0 ? (List<PztRyRlzpjl>) list : new ArrayList<>();
+    }
+
+    @Override
+    public boolean getOpen() {
+        return this.open;
+    }
+
+    @Override
+    public boolean setOpen(boolean open) {
+        return this.open= open;
     }
 }

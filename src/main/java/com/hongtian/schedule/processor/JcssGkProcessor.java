@@ -10,6 +10,7 @@ import com.hongtian.service.PztJcssJbService;
 import com.hongtian.service.PztJmxqRlzpjlDahuaService;
 import com.hongtian.service.PztJmxqSsgkService;
 import com.hongtian.service.PztRyRlzpjlService;
+import com.hongtian.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,10 +39,13 @@ public class JcssGkProcessor extends BaseProcessor<PztJmxqRlzpjlDahua> {
 
     @Override
     public void execute(SjClLog SjClLog) {
-        new JcssGkTjOperator(
-                pztJcssJbMapper,pztJmxqSsgkService,pztJcssJbService,
-                pztJmxqRlzpjlDahuaService,pztRyRlzpjlService
-        ).compute();
+        String dqrq = DateTimeUtils.today();
+        JcssGkTjOperator jcssGkTjOperator = new JcssGkTjOperator(
+                pztJcssJbMapper, pztJmxqSsgkService, pztJcssJbService,
+                pztJmxqRlzpjlDahuaService, pztRyRlzpjlService
+        );
+        jcssGkTjOperator.compute(DateTimeUtils.addDays(dqrq,-1));
+        jcssGkTjOperator.compute(dqrq);
         processorContext.processorUpdateTime(this);
     }
 }

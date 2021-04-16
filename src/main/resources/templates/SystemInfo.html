@@ -56,6 +56,11 @@
             <!--        <p><label>执行车脸抓拍记录任务同步次数:</label><span>{{wcs}}</span></p>-->
             <!--        <p><label>人脸记录同步数:</label><span>{{wcs}}</span></p>-->
             <!--        <p><label>车脸记录同步数:</label><span>{{wcs}}</span></p>-->
+            <div>
+                <el-checkbox-group v-model="selectJob" @change="checkJob">
+                    <el-checkbox v-for="job in jobs" :label="job.taskName" :key="job.taskKey"></el-checkbox>
+                </el-checkbox-group>
+            </div>
             <h3 style="text-align: center">当日运行数据</h3>
             <el-table
                     :data="todayTaskInfo"
@@ -131,7 +136,9 @@
             data:{
                 startTime: 0
             },
-            multipleSelection: []
+            multipleSelection: [],
+            jobs: [],
+            selectJob:[]
         },
         methods:{
             dateFormat(fmt, date) {
@@ -155,6 +162,64 @@
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val
+            },
+            // 获取开启任务的列表
+            getJobs() {
+
+            },
+            // 开启一个任务
+            startJob() {
+
+            },
+            loadTask() {
+                var _this =this
+                window.fetch('http://127.0.0.1:8501/getJobs', {
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    method: 'GET'
+                }).then(response => response.json()).then(result => {
+                    if(result.resultCode == 0) {
+                        _this.jobs = []
+                        _this.selectJob=[]
+                        result.data.forEach(item => {
+                            _this.jobs.push({taskName:item.taskName,taskKey:item.taskKey})
+                            if(item.start){
+                                _this.selectJob.push(item.taskName)
+                            }
+                        })
+                    }else {
+                        _this.$message.error(result.message)
+                    }
+                })
+            },
+            checkJob(value) {
+                let param = '';
+                for(let item of this.jobs) {
+                    debugger
+                    if(value.indexOf(item.taskName) != -1) {
+                        if(param.length > 0) {
+                            param += ','
+                        }
+                        param += item.taskKey
+                    }
+                }
+
+                var _this =this
+                window.fetch('http://127.0.0.1:8501/updateJob?job='+param,{
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    method: 'GET'
+                }).then(response => response.json()).then(result => function(){
+                    if(result.resultCode == 0) {
+                    }else {
+                        _this.$message.error(result.message)
+                    }
+                })
+            },
+            test() {
+                alert(222)
             }
         },
         computed:{
@@ -182,6 +247,7 @@
                 this.todayTaskInfo = this.data['todayTaskInfo']
                 this.redisInfo = this.data['redisInfo']
             }
+            this.loadTask()
         }
     })
 </script>

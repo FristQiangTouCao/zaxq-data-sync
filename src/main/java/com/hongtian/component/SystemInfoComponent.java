@@ -1,6 +1,7 @@
 package com.hongtian.component;
 
 import com.hongtian.dao.mongo.SjClLogDao;
+import com.hongtian.entity.dto.TaskVo;
 import com.hongtian.entity.vo.TodayTaskInfoVo;
 import com.hongtian.schedule.Job;
 import com.hongtian.schedule.ProcessorContext;
@@ -63,5 +64,25 @@ public class SystemInfoComponent {
         });
         List<TodayTaskInfoVo> sort = ListUtils.sort(list);
         return sort;
+    }
+
+
+    public List<TaskVo> getJobs() {
+        List<String> startTasks = processorContext.startTasks;
+        Map<String, String> jobDes = Job.getJobDes();
+        List<TaskVo> jobs =  new ArrayList<>();
+        jobDes.entrySet().forEach(item -> {
+            TaskVo taskVo = new TaskVo();
+            taskVo.setTaskName(item.getValue());
+            taskVo.setTaskKey(item.getKey());
+            taskVo.setStart(startTasks.contains(item.getKey()));
+            jobs.add(taskVo);
+        });
+        return jobs;
+    }
+
+    public String updateTask(String job) {
+        processorContext.updateTask(job);
+        return null;
     }
 }

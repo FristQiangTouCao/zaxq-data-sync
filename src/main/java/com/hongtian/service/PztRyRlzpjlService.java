@@ -16,4 +16,7 @@ import java.util.List;
 public interface PztRyRlzpjlService extends IService<PztRyRlzpjl>, BaseService<PztRyRlzpjl>{
 
     List<PztRyRlzpjl> getZpjlByFaceId(String faceId);
+
+    boolean getOpen();
+    boolean setOpen(boolean open);
 }

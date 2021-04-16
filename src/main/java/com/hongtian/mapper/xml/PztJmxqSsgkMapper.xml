@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hongtian.mapper.PztJmxqSsgkMapper">
-
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.hongtian.entity.PztJmxqSsgk">
-        <id column="NBBH" property="nbbh" />
-        <result column="SSLX" property="sslx" />
-        <result column="TJRQ" property="tjrq" />
-        <result column="TJSL" property="tjsl" />
-        <result column="JMXQBH" property="jmxqbh" />
-        <result column="SBBH" property="sbbh" />
-        <result column="SJGSDW" property="sjgsdw" />
-        <result column="QTSL" property="qtsl" />
-        <result column="SJLDSL" property="sjldsl" />
-        <result column="RLZPSL" property="rlzpsl" />
-    </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        NBBH, SSLX, TJRQ, TJSL, JMXQBH, SBBH, SJGSDW, QTSL, SJLDSL, RLZPSL
-    </sql>
-
 </mapper>

@@ -12,7 +12,6 @@ import com.hongtian.service.PztJcssJbService;
 import com.hongtian.service.PztJmxqRlzpjlDahuaService;
 import com.hongtian.service.PztRyJbService;
 import com.hongtian.service.PztRyRlzpjlService;
-import com.hongtian.util.DateTimeUtils;
 import com.hongtian.util.ThreadUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,7 @@ public class PztRlzpldProcessor extends BaseProcessor<PztJmxqRlzpjlDahua> {
     private PztJmxqRlzpjlDahuaBackMapper pztJmxqRlzpjlDahuaBackMapper;
 
 
+
     private ThreadPool threadPool;
 
     @Override
@@ -78,8 +78,17 @@ public class PztRlzpldProcessor extends BaseProcessor<PztJmxqRlzpjlDahua> {
         while(true) {
             if (threadPool.activeThreadCount() == 0) {
                 break;
+            }else {
+                if(rlzpjlRedisDao.getSize() > 100 && threadPool.activeThreadCount() < 10) {
+                    for(int i = 0 ; i < (30-threadPool.activeThreadCount()); i++) {
+                        threadPool.excute(new PztJmxqRlzpjlLdOperator(rlzpjlRedisDao,pztRyRlzpjlService,pztJmxqRlzpjlDahuaService,
+                                SjClLog,this,pztRyJbService,pztJcssJbService,pztJmxqRlzpjlDahuaBackMapper));
+                        ThreadUtils.sleep(100);
+                    }
+                }
             }
-            ThreadUtils.sleep(2000);
+//            log.warn("落地线程活动数量：{}。",threadPool.activeThreadCount());
+            ThreadUtils.sleep(10000);
         }
     }
 
@@ -87,7 +96,7 @@ public class PztRlzpldProcessor extends BaseProcessor<PztJmxqRlzpjlDahua> {
         Update update = new Update();
         update.inc("total",count);
         update.inc("successCount",count);
-        update.set("updateTime", DateTimeUtils.now());
+        update.set("updateTime", System.currentTimeMillis());
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
         sjClLogDao.update(query,update,"sjClLog");

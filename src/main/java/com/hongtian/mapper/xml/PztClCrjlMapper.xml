@@ -3,7 +3,7 @@
 <mapper namespace="com.hongtian.mapper.PztClCrjlMapper">
 
    <select id="getUnHandleData" resultType="com.hongtian.entity.PztClCrjl">
-       select * from pzt_cl_crjl where (clbz = '0' or clbz is null) and rownum &lt;= 1000
+       select * from pzt_cl_crjl where clbz = '0' and rownum &lt;= 1000
    </select>
 
 </mapper>

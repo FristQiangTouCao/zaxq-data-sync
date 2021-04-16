@@ -81,6 +81,9 @@ public class PztJmxqSsgk extends Model<PztJmxqSsgk> {
     @TableField(exist = false)
     private double sjldslVSqtsl;
 
+    @TableField("xz")
+    private String xz;
+
     @Override
     protected Serializable pkVal() {
         return this.nbbh;

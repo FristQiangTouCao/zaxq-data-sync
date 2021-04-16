@@ -3,6 +3,7 @@ package com.hongtian.controller;
 import com.hongtian.common.response.CommonResult;
 import com.hongtian.component.SystemInfoComponent;
 import com.hongtian.dao.redisDao.RedisServices;
+import com.hongtian.entity.dto.TaskVo;
 import com.hongtian.entity.vo.TodayTaskInfoVo;
 import com.hongtian.util.SystemInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
@@ -67,6 +69,23 @@ public class SystemInfoController {
         return CommonResult.successData(todayTaskInfo);
     }
 
+    @ResponseBody
+    @GetMapping("/getJobs")
+    public Object getJobs() {
+        List<TaskVo> jobs = systemInfoComponent.getJobs();
+        return CommonResult.successData(jobs);
+    }
+
+    @ResponseBody
+    @GetMapping("/updateJob")
+    public Object startJob(@RequestParam("job") String job) {
+        String result = systemInfoComponent.updateTask(job);
+        if(result == null) {
+           return CommonResult.successData("ok!");
+        } else {
+            return CommonResult.error(result);
+        }
+    }
 
     @ResponseBody
     @GetMapping("runningTaskList")

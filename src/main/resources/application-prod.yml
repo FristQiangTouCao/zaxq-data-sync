@@ -44,7 +44,7 @@ spring:
     database: 0
     host:  41.204.5.126
     port: 6379
-#    password: 123456zaxq
+    password: 123456zaxq
 server:
   port: 8501
 #数据卷目录

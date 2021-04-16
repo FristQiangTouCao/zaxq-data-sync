@@ -69,6 +69,14 @@ public class ProcessorContext implements ApplicationContextAware {
         }
     }
 
+    public void updateTask (String job) {
+        XtPz xtPz = xtpzDao.getXtPz(Constant.START_TASK);
+        xtPz.setValue(job);
+        xtpzDao.update(xtPz);
+        loadStartTasks();
+    }
+
+
     private void  loadAllIntervalTimeEnums() {
         JobProcessorIntervalTime[] enumConstants = JobProcessorIntervalTime.class.getEnumConstants();
         processorIntervalTimes = Arrays.asList(enumConstants);
