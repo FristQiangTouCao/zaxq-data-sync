@@ -5,4 +5,25 @@
     <select id="getUnHandleData" resultType="com.hongtian.entity.PztRyRlzpjl">
         select * from pzt_ry_rlzpjl where clbz = '0' and rownum &lt;= 1000
     </select>
+    
+    
+    
+    <select id="getRyrlapjlByStartAndEnd" resultType="com.hongtian.entity.PztRyRlzpjl">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        TMP.*,
+        ROWNUM ROW_ID
+        FROM
+        (
+            select * from pzt_ry_rlzpjl order by jlsj
+        ) TMP
+        WHERE
+        ROWNUM &lt;= #{end,jdbcType=INTEGER}
+        )
+        WHERE
+        ROW_ID > #{start,jdbcType=INTEGER}
+    </select>
 </mapper>

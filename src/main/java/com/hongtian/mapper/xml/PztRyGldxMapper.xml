@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongtian.mapper.PztRyGldxMapper">
+
+    <select id="getZdrycphm" resultType="string">
+        select wp.SLJGG from PZT_RY_GLDX ry
+        left join pzt_wp_jb wp on ry.GMSFHM=wp.SSRYGMSFHM
+        where ry.rylx in
+        <foreach item="item" index="index" collection="rylxs" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+         and wp.WPZL='WP20' and wp.SLJGG is not null
+    </select>
+
+    <select id="getZdryGmsfhm" resultType="string">
+        select GMSFHM from PZT_RY_GLDX where rylx in
+        <foreach item="item" index="index" collection="rylxs" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and GMSFHM is not null
+    </select>
+
+</mapper>

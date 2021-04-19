@@ -6,4 +6,23 @@
        select * from pzt_cl_crjl where clbz = '0' and rownum &lt;= 1000
    </select>
 
+    <select id="getClcrjljlByStartAndEnd" resultType="com.hongtian.entity.PztClCrjl">
+         SELECT
+        *
+        FROM
+        (
+        SELECT
+        TMP.*,
+        ROWNUM ROW_ID
+        FROM
+        (
+            select * from pzt_cl_crjl order by jlsj
+        ) TMP
+        WHERE
+        ROWNUM &lt;= #{end,jdbcType=INTEGER}
+        )
+        WHERE
+        ROW_ID > #{start,jdbcType=INTEGER}
+    </select>
+
 </mapper>

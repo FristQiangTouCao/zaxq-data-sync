@@ -13,7 +13,8 @@ public enum  Job implements Comparable<Job>{
     RY_RLZPJL_BACK("人脸抓拍记录备份",JobProcessorIntervalTime.ONE_MINUTES),
     CL_CRJL_BACK("车辆出入记录备份",JobProcessorIntervalTime.ONE_MINUTES),
     JCSS_GK("基础设施概况",JobProcessorIntervalTime.ONT_HOUR),
-    JCSS_GK_LD("基础设施概况-落地",JobProcessorIntervalTime.ONT_HOUR);
+    JCSS_GK_LD("基础设施概况-落地",JobProcessorIntervalTime.ONT_HOUR),
+    PZT_RY_RLZPJL_SB("人脸抓拍记录上报",JobProcessorIntervalTime.ONT_HOUR);
 
 
     // 名称

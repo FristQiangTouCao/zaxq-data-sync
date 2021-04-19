@@ -16,7 +16,9 @@ public class CodeGenerator {
 
     // 需要生成的表的名称
     private static String[] tables = {
-            "PZT_JMXQ_SSGK"
+            "PZT_RY_RLZPJL_YJXG",
+            "PZT_CL_CRJL_YJXG",
+            "PZT_RY_GLDX"
     };
     //开启swagger
     private static boolean openSwagger = false;
@@ -59,7 +61,7 @@ public class CodeGenerator {
 
         //数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:oracle:thin:@112.17.180.66:41521:orcl");
+        dsc.setUrl("jdbc:oracle:thin:@112.17.180.66:49295:orcl");
         // dsc.setSchemaName("public");
         dsc.setDriverName("oracle.jdbc.driver.OracleDriver");
         dsc.setUsername("pz2010");

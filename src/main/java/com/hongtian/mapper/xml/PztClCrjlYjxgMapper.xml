@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongtian.mapper.PztClCrjlYjxgMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hongtian.entity.PztClCrjlYjxg">
+        <result column="NBBH" property="nbbh" />
+        <result column="JMXQBH" property="jmxqbh" />
+        <result column="SBBH" property="sbbh" />
+        <result column="JLSJ" property="jlsj" />
+        <result column="JCBZ" property="jcbz" />
+        <result column="SJGSDW" property="sjgsdw" />
+        <result column="CLSJ" property="clsj" />
+        <result column="CPHM" property="cphm" />
+        <result column="HPZL" property="hpzl" />
+        <result column="BZ" property="bz" />
+        <result column="GLM" property="glm" />
+        <result column="CJR" property="cjr" />
+        <result column="CJRJH" property="cjrjh" />
+        <result column="CJRXQ" property="cjrxq" />
+        <result column="CJRZRQ" property="cjrzrq" />
+        <result column="CJRIP" property="cjrip" />
+        <result column="CJSJ" property="cjsj" />
+        <result column="XGR" property="xgr" />
+        <result column="XGRJH" property="xgrjh" />
+        <result column="XGRIP" property="xgrip" />
+        <result column="XGRXQ" property="xgrxq" />
+        <result column="XGRZRQ" property="xgrzrq" />
+        <result column="XGSJ" property="xgsj" />
+        <result column="YXBZ" property="yxbz" />
+        <result column="FSBZ" property="fsbz" />
+        <result column="CLBZ" property="clbz" />
+        <result column="SBBZ" property="sbbz" />
+        <result column="SBMC" property="sbmc" />
+        <result column="CLBH" property="clbh" />
+        <result column="RKBM" property="rkbm" />
+        <result column="XM" property="xm" />
+        <result column="GMSFHM" property="gmsfhm" />
+        <result column="JCSSBH" property="jcssbh" />
+        <result column="JMXQMC" property="jmxqmc" />
+        <result column="JJZPURL" property="jjzpurl" />
+        <result column="CPZPURL" property="cpzpurl" />
+        <result column="YJZPURL" property="yjzpurl" />
+        <result column="HCTURL" property="hcturl" />
+        <result column="SLTURL" property="slturl" />
+        <result column="GCJLXH" property="gcjlxh" />
+        <result column="GCJLBH" property="gcjlbh" />
+        <result column="HPYS" property="hpys" />
+        <result column="SFZHAF" property="sfzhaf" />
+        <result column="SSLX" property="sslx" />
+        <result column="YCYJBH" property="ycyjbh" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        NBBH, JMXQBH, SBBH, JLSJ, JCBZ, SJGSDW, CLSJ, CPHM, HPZL, BZ, GLM, CJR, CJRJH, CJRXQ, CJRZRQ, CJRIP, CJSJ, XGR, XGRJH, XGRIP, XGRXQ, XGRZRQ, XGSJ, YXBZ, FSBZ, CLBZ, SBBZ, SBMC, CLBH, RKBM, XM, GMSFHM, JCSSBH, JMXQMC, JJZPURL, CPZPURL, YJZPURL, HCTURL, SLTURL, GCJLXH, GCJLBH, HPYS, SFZHAF, SSLX, YCYJBH
+    </sql>
+
+</mapper>

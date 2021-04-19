@@ -6,10 +6,13 @@ import com.hongtian.entity.PztJmxqSsgk;
 import com.hongtian.entity.PztRyRlzpjl;
 import com.hongtian.service.PztJmxqSsgkService;
 import com.hongtian.service.PztRyRlzpjlService;
+import com.hongtian.temp.UploadClcrjlTemp;
+import com.hongtian.temp.UploadRyrlzpjlTemp;
 import com.hongtian.util.DateTimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +35,12 @@ public class DebugController {
 
     @Autowired
     private PztRyRlzpjlService pztRyRlzpjlService;
+
+    @Autowired
+    private UploadRyrlzpjlTemp uploadRyrlzpjlTemp;
+
+    @Autowired
+    private UploadClcrjlTemp uploadClcrjlTemp;
 
     @RequestMapping("/openLd")
     public Object openLd(@RequestParam("open") boolean open) {
@@ -81,5 +90,18 @@ public class DebugController {
             item.setXz("1");
             pztJmxqSsgkService.updateById(item);
         });
+    }
+
+
+    @GetMapping("/uploadRyrlzpjl")
+    public Object uploadRyrlzpjl(@RequestParam("size") int thread) {
+        uploadRyrlzpjlTemp.upload(thread);
+        return "ok";
+    }
+
+    @GetMapping("/uploadClcrjl")
+    public Object uploadClcrjl(@RequestParam("size") int thread) {
+        uploadClcrjlTemp.upload(thread);
+        return "ok";
     }
 }

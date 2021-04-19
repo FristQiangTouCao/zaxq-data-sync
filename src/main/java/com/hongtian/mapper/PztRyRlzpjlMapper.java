@@ -19,4 +19,7 @@ import java.util.List;
 @DS("pz")
 public interface PztRyRlzpjlMapper extends BaseMapper<PztRyRlzpjl> {
     List<PztRyRlzpjl> getUnHandleData();
+
+    List<PztRyRlzpjl> getRyrlapjlByStartAndEnd(int start,int end);
+
 }
