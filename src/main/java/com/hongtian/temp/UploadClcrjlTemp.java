@@ -1,6 +1,6 @@
 package com.hongtian.temp;
 
-import com.hongtian.component.PztClcrjlSbComponent;
+import com.hongtian.component.PztClcrjlSbComponentTemp;
 import com.hongtian.dao.mongo.SjClLogDao;
 import com.hongtian.entity.PztClCrjl;
 import com.hongtian.entity.SjClLog;
@@ -40,10 +40,10 @@ public class UploadClcrjlTemp {
         SjClLog sjClLog = new SjClLog();
         sjClLog.setStatus(0);
         sjClLog.setStartTime(System.currentTimeMillis());
-        sjClLog.setType(Job.PZT_RY_RLZPJL_SB.getName());
+        sjClLog.setType(Job.PZT_CL_CRJL_SB.getName());
         sjClLogDao.insert(sjClLog);
         for(int i = 0; i < threadCount;i++) {
-            new Thread(new runnable(),i*10 + "").start();
+            new Thread(new runnable(),i*2 + "").start();
         }
         // 更新上传数量
         new Thread(new Runnable() {
@@ -71,25 +71,19 @@ public class UploadClcrjlTemp {
     }
 
     public class runnable implements Runnable{
-        public PztClcrjlSbComponent sbComponent = new PztClcrjlSbComponent(pztClCrjlMapper,pztClCrjlYjxgService);
+        public PztClcrjlSbComponentTemp sbComponent = new PztClcrjlSbComponentTemp(pztClCrjlMapper,pztClCrjlYjxgService);
         @Override
         public void run() {
             int startPage = Integer.parseInt(Thread.currentThread().getName());
-            int endPage = startPage + 5;
             while(true) {
                 int page = startPage;
                 List<PztClCrjl> list = getList(page,1000);
                 if(CollectionUtils.isEmpty(list) ||
                         DateTimeUtils.addDays(DateTimeUtils.today(),-30).compareTo(list.get(0).getJlsj()) < 0){
-
                     break;
                 }
                 sbComponent.upload(list);
                 total += list.size();
-                page++;
-                if(page > endPage) {
-                    page = startPage;
-                }
             }
 
         }
@@ -98,7 +92,7 @@ public class UploadClcrjlTemp {
     public List<PztClCrjl> getList(int page, int size) {
         int start  = page * size;
         int end  = (page + 1) * size;
-        List<PztClCrjl> ryrlapjlByStartAndEnd = pztClCrjlMapper.getClcrjljlByStartAndEnd(start, end);
+        List<PztClCrjl> ryrlapjlByStartAndEnd = pztClCrjlMapper.getClcrjljlByStartAndEnd(start, end,DateTimeUtils.addDays(DateTimeUtils.today(),-30));
         return ryrlapjlByStartAndEnd;
     }
 

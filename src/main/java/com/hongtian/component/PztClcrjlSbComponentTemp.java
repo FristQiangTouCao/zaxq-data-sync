@@ -7,7 +7,6 @@ import com.hongtian.entity.dto.Register;
 import com.hongtian.entity.dto.RegisterObject;
 import com.hongtian.mapper.PztClCrjlMapper;
 import com.hongtian.service.PztClCrjlYjxgService;
-import com.hongtian.util.DateTimeUtils;
 import com.hongtian.util.EntityToXmlUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +27,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class PztClcrjlSbComponent {
+public class PztClcrjlSbComponentTemp {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
     public static  String url="http://41.188.131.157:8230/zhian/PSPC/SC/Community/MotorVehicleEvent";
     public static  String Registerurl="http://41.188.131.157:8230/zhian/PSPC/SC/System/Register";
@@ -40,7 +39,7 @@ public class PztClcrjlSbComponent {
     @Autowired
     PztClCrjlYjxgService pztClCrjlYjxgService;
 
-    public PztClcrjlSbComponent(PztClCrjlMapper pztClCrjlMapper, PztClCrjlYjxgService pztClCrjlYjxgService) {
+    public PztClcrjlSbComponentTemp(PztClCrjlMapper pztClCrjlMapper, PztClCrjlYjxgService pztClCrjlYjxgService) {
         this.pztClCrjlMapper = pztClCrjlMapper;
         this.pztClCrjlYjxgService = pztClCrjlYjxgService;
     }
@@ -83,10 +82,9 @@ public class PztClcrjlSbComponent {
                 upData(url,faceCaptureResult);
                 item.stream().parallel().forEach(ls ->{
                     log.warn("重点车辆检查");
-                    ls.setFsbz("1");
-                    ls.setXgsj(DateTimeUtils.now());
                     pztClCrjlYjxgService.zdcljc(ls);
-                    pztClCrjlMapper.updateById(ls);
+                    log.warn("删除已上报数据");
+                    pztClCrjlMapper.deleteById(ls.getNbbh());
                 });
             });
             log.warn("上报车辆数据：count:{}",list.size());

@@ -1,241 +1,241 @@
 package com.hongtian.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MotorVehicleEvent")
 public class MotorVehicleEvent {
-    @JsonProperty(value = "JDCGCXXBZ")
+    @JSONField( name = "JDCGCXXBZ")
     private String jdcgcxxbz;
-    @JsonProperty(value = "GCFX")
+    @JSONField( name = "GCFX")
     private String gcfx;
-    @JsonProperty(value = "JDCHPHM")
+    @JSONField( name = "JDCHPHM")
     private String jdchphm;
-    @JsonProperty(value = "ZSJ_ZXDHZB")
+    @JSONField( name = "ZSJ_ZXDHZB")
     private String zsjzxdhzb;
-    @JsonProperty(value = "ZSJ_ZXDZZB")
+    @JSONField( name = "ZSJ_ZXDZZB")
     private String zsjzxdzzb;
-    @JsonProperty(value = "YXJ_ZXDHZB")
+    @JSONField( name = "YXJ_ZXDHZB")
     private String yxjzxdhzb;
-    @JsonProperty(value = "YXJ_ZXDZZB")
+    @JSONField( name = "YXJ_ZXDZZB")
     private String yxjzxdzzb;
-    @JsonProperty(value = "JDCCLLXDM")
+    @JSONField( name = "JDCCLLXDM")
     private String jdccllxdm;
-    @JsonProperty(value = "CLPP")
+    @JSONField( name = "CLPP")
     private String clpp;
-    @JsonProperty(value = "JDCCSYSDM")
+    @JSONField( name = "JDCCSYSDM")
     private String jdccsysdm;
-    @JsonProperty(value = "CLXH")
+    @JSONField( name = "CLXH")
     private String clxh;
-    @JsonProperty(value = "FXCDBH")
+    @JSONField( name = "FXCDBH")
     private String fxcdbh;
-    @JsonProperty(value = "CJSBXXBZ")
+    @JSONField( name = "CJSBXXBZ")
     private String cjsbxxbz;
-    @JsonProperty(value = "SFTGC_PDBZ")
+    @JSONField( name = "SFTGC_PDBZ")
     private String sftgcpdbz;
-    @JsonProperty(value = "ZJSR_RLBZ")
+    @JSONField( name = "ZJSR_RLBZ")
     private String zjsrrlbz;
-    @JsonProperty(value = "CLQJTXBZ")
+    @JSONField( name = "CLQJTXBZ")
     private String clqjtxbz;
-    @JsonProperty(value = "CLHPTXBZ")
+    @JSONField( name = "CLHPTXBZ")
     private String clhptxbz;
-    @JsonProperty(value = "HCTXBZ")
+    @JSONField( name = "HCTXBZ")
     private String hctxbz;
-    @JsonProperty(value = "FJSR_RLBZ")
+    @JSONField( name = "FJSR_RLBZ")
     private String fjsrrlbz;
-    @JsonProperty(value = "JDCHPZLDM")
+    @JSONField( name = "JDCHPZLDM")
     private String jdchpzldm;
-    @JsonProperty(value = "SFWZDCL_PDBZ")
+    @JSONField( name = "SFWZDCL_PDBZ")
     private String sfwzdclpdbz;
-    @JsonProperty(value = "JDCHPYSDM")
+    @JSONField( name = "JDCHPYSDM")
     private String jdchpysdm;
-    @JsonProperty(value = "CJSJ")
+    @JSONField( name = "CJSJ")
     private String cjsj;
 
 
 
-    @JsonProperty(value = "JDCGCXXBZ")
+    @JSONField( name = "JDCGCXXBZ")
     public String getJdcgcxxbz() {
         return jdcgcxxbz;
     }
-    @JsonProperty(value = "JDCGCXXBZ")
+    @JSONField( name = "JDCGCXXBZ")
     public void setJdcgcxxbz(String jdcgcxxbz) {
         this.jdcgcxxbz = jdcgcxxbz;
     }
-    @JsonProperty(value = "GCFX")
+    @JSONField( name = "GCFX")
     public String getGcfx() {
         return gcfx;
     }
-    @JsonProperty(value = "GCFX")
+    @JSONField( name = "GCFX")
     public void setGcfx(String gcfx) {
         this.gcfx = gcfx;
     }
-    @JsonProperty(value = "JDCHPHM")
+    @JSONField( name = "JDCHPHM")
     public String getJdchphm() {
         return jdchphm;
     }
-    @JsonProperty(value = "JDCHPHM")
+    @JSONField( name = "JDCHPHM")
     public void setJdchphm(String jdchphm) {
         this.jdchphm = jdchphm;
     }
-    @JsonProperty(value = "ZSJ_ZXDHZB")
+    @JSONField( name = "ZSJ_ZXDHZB")
     public String getZsjzxdhzb() {
         return zsjzxdhzb;
     }
-    @JsonProperty(value = "ZSJ_ZXDHZB")
+    @JSONField( name = "ZSJ_ZXDHZB")
     public void setZsjzxdhzb(String zsjzxdhzb) {
         this.zsjzxdhzb = zsjzxdhzb;
     }
-    @JsonProperty(value = "ZSJ_ZXDZZB")
+    @JSONField( name = "ZSJ_ZXDZZB")
     public String getZsjzxdzzb() {
         return zsjzxdzzb;
     }
-    @JsonProperty(value = "ZSJ_ZXDZZB")
+    @JSONField( name = "ZSJ_ZXDZZB")
     public void setZsjzxdzzb(String zsjzxdzzb) {
         this.zsjzxdzzb = zsjzxdzzb;
     }
-    @JsonProperty(value = "YXJ_ZXDHZB")
+    @JSONField( name = "YXJ_ZXDHZB")
     public String getYxjzxdhzb() {
         return yxjzxdhzb;
     }
-    @JsonProperty(value = "YXJ_ZXDHZB")
+    @JSONField( name = "YXJ_ZXDHZB")
     public void setYxjzxdhzb(String yxjzxdhzb) {
         this.yxjzxdhzb = yxjzxdhzb;
     }
-    @JsonProperty(value = "YXJ_ZXDZZB")
+    @JSONField( name = "YXJ_ZXDZZB")
     public String getYxjzxdzzb() {
         return yxjzxdzzb;
     }
-    @JsonProperty(value = "YXJ_ZXDZZB")
+    @JSONField( name = "YXJ_ZXDZZB")
     public void setYxjzxdzzb(String yxjzxdzzb) {
         this.yxjzxdzzb = yxjzxdzzb;
     }
-    @JsonProperty(value = "JDCCLLXDM")
+    @JSONField( name = "JDCCLLXDM")
     public String getJdccllxdm() {
         return jdccllxdm;
     }
-    @JsonProperty(value = "JDCCLLXDM")
+    @JSONField( name = "JDCCLLXDM")
     public void setJdccllxdm(String jdccllxdm) {
         this.jdccllxdm = jdccllxdm;
     }
-    @JsonProperty(value = "CLPP")
+    @JSONField( name = "CLPP")
     public String getClpp() {
         return clpp;
     }
-    @JsonProperty(value = "CLPP")
+    @JSONField( name = "CLPP")
     public void setClpp(String clpp) {
         this.clpp = clpp;
     }
-    @JsonProperty(value = "JDCCSYSDM")
+    @JSONField( name = "JDCCSYSDM")
     public String getJdccsysdm() {
         return jdccsysdm;
     }
-    @JsonProperty(value = "JDCCSYSDM")
+    @JSONField( name = "JDCCSYSDM")
     public void setJdccsysdm(String jdccsysdm) {
         this.jdccsysdm = jdccsysdm;
     }
-    @JsonProperty(value = "CLXH")
+    @JSONField( name = "CLXH")
     public String getClxh() {
         return clxh;
     }
-    @JsonProperty(value = "CLXH")
+    @JSONField( name = "CLXH")
     public void setClxh(String clxh) {
         this.clxh = clxh;
     }
-    @JsonProperty(value = "FXCDBH")
+    @JSONField( name = "FXCDBH")
     public String getFxcdbh() {
         return fxcdbh;
     }
-    @JsonProperty(value = "FXCDBH")
+    @JSONField( name = "FXCDBH")
     public void setFxcdbh(String fxcdbh) {
         this.fxcdbh = fxcdbh;
     }
-    @JsonProperty(value = "CJSBXXBZ")
+    @JSONField( name = "CJSBXXBZ")
     public String getCjsbxxbz() {
         return cjsbxxbz;
     }
-    @JsonProperty(value = "CJSBXXBZ")
+    @JSONField( name = "CJSBXXBZ")
     public void setCjsbxxbz(String cjsbxxbz) {
         this.cjsbxxbz = cjsbxxbz;
     }
-    @JsonProperty(value = "SFTGC_PDBZ")
+    @JSONField( name = "SFTGC_PDBZ")
     public String getSftgcpdbz() {
         return sftgcpdbz;
     }
-    @JsonProperty(value = "SFTGC_PDBZ")
+    @JSONField( name = "SFTGC_PDBZ")
     public void setSftgcpdbz(String sftgcpdbz) {
         this.sftgcpdbz = sftgcpdbz;
     }
-    @JsonProperty(value = "ZJSR_RLBZ")
+    @JSONField( name = "ZJSR_RLBZ")
     public String getZjsrrlbz() {
         return zjsrrlbz;
     }
-    @JsonProperty(value = "ZJSR_RLBZ")
+    @JSONField( name = "ZJSR_RLBZ")
     public void setZjsrrlbz(String zjsrrlbz) {
         this.zjsrrlbz = zjsrrlbz;
     }
-    @JsonProperty(value = "CLQJTXBZ")
+    @JSONField( name = "CLQJTXBZ")
     public String getClqjtxbz() {
         return clqjtxbz;
     }
-    @JsonProperty(value = "CLQJTXBZ")
+    @JSONField( name = "CLQJTXBZ")
     public void setClqjtxbz(String clqjtxbz) {
         this.clqjtxbz = clqjtxbz;
     }
-    @JsonProperty(value = "CLHPTXBZ")
+    @JSONField( name = "CLHPTXBZ")
     public String getClhptxbz() {
         return clhptxbz;
     }
-    @JsonProperty(value = "CLHPTXBZ")
+    @JSONField( name = "CLHPTXBZ")
     public void setClhptxbz(String clhptxbz) {
         this.clhptxbz = clhptxbz;
     }
-    @JsonProperty(value = "HCTXBZ")
+    @JSONField( name = "HCTXBZ")
     public String getHctxbz() {
         return hctxbz;
     }
-    @JsonProperty(value = "HCTXBZ")
+    @JSONField( name = "HCTXBZ")
     public void setHctxbz(String hctxbz) {
         this.hctxbz = hctxbz;
     }
-    @JsonProperty(value = "FJSR_RLBZ")
+    @JSONField( name = "FJSR_RLBZ")
     public String getFjsrrlbz() {
         return fjsrrlbz;
     }
-    @JsonProperty(value = "FJSR_RLBZ")
+    @JSONField( name = "FJSR_RLBZ")
     public void setFjsrrlbz(String fjsrrlbz) {
         this.fjsrrlbz = fjsrrlbz;
     }
-    @JsonProperty(value = "JDCHPZLDM")
+    @JSONField( name = "JDCHPZLDM")
     public String getJdchpzldm() {
         return jdchpzldm;
     }
-    @JsonProperty(value = "JDCHPZLDM")
+    @JSONField( name = "JDCHPZLDM")
     public void setJdchpzldm(String jdchpzldm) {
         this.jdchpzldm = jdchpzldm;
     }
-    @JsonProperty(value = "SFWZDCL_PDBZ")
+    @JSONField( name = "SFWZDCL_PDBZ")
     public String getSfwzdclpdbz() {
         return sfwzdclpdbz;
     }
-    @JsonProperty(value = "SFWZDCL_PDBZ")
+    @JSONField( name = "SFWZDCL_PDBZ")
     public void setSfwzdclpdbz(String sfwzdclpdbz) {
         this.sfwzdclpdbz = sfwzdclpdbz;
     }
-    @JsonProperty(value = "JDCHPYSDM")
+    @JSONField( name = "JDCHPYSDM")
     public String getJdchpysdm() {
         return jdchpysdm;
     }
-    @JsonProperty(value = "JDCHPYSDM")
+    @JSONField( name = "JDCHPYSDM")
     public void setJdchpysdm(String jdchpysdm) {
         this.jdchpysdm = jdchpysdm;
     }
-    @JsonProperty(value = "CJSJ")
+    @JSONField( name = "CJSJ")
     public String getCjsj() {
         return cjsj;
     }
-    @JsonProperty(value = "CJSJ")
+    @JSONField( name = "CJSJ")
     public void setCjsj(String cjsj) {
         this.cjsj = cjsj;
     }

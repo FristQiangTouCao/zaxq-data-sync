@@ -18,7 +18,7 @@
         ROWNUM ROW_ID
         FROM
         (
-            select * from pzt_ry_rlzpjl order by jlsj
+            select * from pzt_ry_rlzpjl where jlsj > #{time,jdbcType=VARCHAR} order by jlsj
         ) TMP
         WHERE
         ROWNUM &lt;= #{end,jdbcType=INTEGER}
@@ -26,4 +26,29 @@
         WHERE
         ROW_ID > #{start,jdbcType=INTEGER}
     </select>
+
+
+
+    <select id="getRyrlapjlByStartAndEndCurrentMonth" resultType="com.hongtian.entity.PztRyRlzpjl">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        TMP.*,
+        ROWNUM ROW_ID
+        FROM
+        (
+            select * from pzt_ry_rlzpjl where jlsj > #{time,jdbcType=VARCHAR} and fsbz='0' order by jlsj
+        ) TMP
+        WHERE
+        ROWNUM &lt;= #{end,jdbcType=INTEGER}
+        )
+        WHERE
+        ROW_ID > #{start,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteFsRlzpjl">
+        delete from pzt_ry_rlzpjl where fsbz = '1' and jlsj &lt; #{time,jdbcType=VARCHAR} and rownum &lt; 2000
+    </delete>
 </mapper>

@@ -1,6 +1,6 @@
 package com.hongtian.temp;
 
-import com.hongtian.component.PztRyrlzpjlSbComponent;
+import com.hongtian.component.PztRyrlzpjlSbComponentTemp;
 import com.hongtian.dao.mongo.SjClLogDao;
 import com.hongtian.entity.PztRyRlzpjl;
 import com.hongtian.entity.SjClLog;
@@ -43,7 +43,7 @@ public class UploadRyrlzpjlTemp {
         sjClLog.setType(Job.PZT_RY_RLZPJL_SB.getName());
         sjClLogDao.insert(sjClLog);
         for(int i = 0; i < threadCount;i++) {
-            new Thread(new runnable(),i*10 + "").start();
+            new Thread(new runnable(),i*2 + "").start();
         }
         // 更新上传数量
         new Thread(new Runnable() {
@@ -71,11 +71,10 @@ public class UploadRyrlzpjlTemp {
     }
 
     public class runnable implements Runnable{
-        public PztRyrlzpjlSbComponent sbComponent = new PztRyrlzpjlSbComponent(pztRyrlzpjlDao,pztRyRlzpjlYjxgService);
+        public PztRyrlzpjlSbComponentTemp sbComponent = new PztRyrlzpjlSbComponentTemp(pztRyrlzpjlDao,pztRyRlzpjlYjxgService);
         @Override
         public void run() {
             int startPage = Integer.parseInt(Thread.currentThread().getName());
-            int endPage = startPage + 5;
             while(true) {
                 int page = startPage;
                 List<PztRyRlzpjl> list = getList(page,1000);
@@ -86,10 +85,6 @@ public class UploadRyrlzpjlTemp {
                 }
                 sbComponent.upload(list);
                 total += list.size();
-                page++;
-                if(page > endPage) {
-                    page = startPage;
-                }
             }
 
         }
@@ -98,8 +93,7 @@ public class UploadRyrlzpjlTemp {
     public List<PztRyRlzpjl> getList(int page, int size) {
         int start  = page * size;
         int end  = (page + 1) * size;
-        List<PztRyRlzpjl> ryrlapjlByStartAndEnd = pztRyrlzpjlDao.getRyrlapjlByStartAndEnd(start, end);
+        List<PztRyRlzpjl> ryrlapjlByStartAndEnd = pztRyrlzpjlDao.getRyrlapjlByStartAndEnd(start, end,"20210101");
         return ryrlapjlByStartAndEnd;
     }
-
 }

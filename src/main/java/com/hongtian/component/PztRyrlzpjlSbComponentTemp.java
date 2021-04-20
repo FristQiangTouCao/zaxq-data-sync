@@ -26,14 +26,14 @@ import java.util.Map;
  * @description 人脸抓拍记录上报原子程序
  */
 @Slf4j
-public class PztRyrlzpjlSbComponent {
+public class PztRyrlzpjlSbComponentTemp {
 
     PztRyRlzpjlMapper pztRyRlzpjlDao;
 
 
     PztRyRlzpjlYjxgService pztRyRlzpjlYjxgService;
 
-    public PztRyrlzpjlSbComponent(PztRyRlzpjlMapper pztRyRlzpjlDao, PztRyRlzpjlYjxgService pztRyRlzpjlYjxgService) {
+    public PztRyrlzpjlSbComponentTemp(PztRyRlzpjlMapper pztRyRlzpjlDao, PztRyRlzpjlYjxgService pztRyRlzpjlYjxgService) {
         this.pztRyRlzpjlDao = pztRyRlzpjlDao;
         this.pztRyRlzpjlYjxgService = pztRyRlzpjlYjxgService;
     }
@@ -83,9 +83,8 @@ public class PztRyrlzpjlSbComponent {
                 item.stream().parallel().forEach(ls ->{
                     log.warn("重点人员检查");
                     pztRyRlzpjlYjxgService.zdryjc(ls);
-                    ls.setFsbz("1");
-                    ls.setXgsj(DateTimeUtils.now());
-                    pztRyRlzpjlDao.updateById(ls);
+                    log.warn("删除已上报数据");
+                    pztRyRlzpjlDao.deleteById(ls.getNbbh());
                 });
             });
             log.warn("上报人脸数据：count:{}",list.size());

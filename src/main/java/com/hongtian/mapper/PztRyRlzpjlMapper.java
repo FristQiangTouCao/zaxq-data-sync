@@ -3,6 +3,7 @@ package com.hongtian.mapper;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.hongtian.entity.PztRyRlzpjl;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +21,10 @@ import java.util.List;
 public interface PztRyRlzpjlMapper extends BaseMapper<PztRyRlzpjl> {
     List<PztRyRlzpjl> getUnHandleData();
 
-    List<PztRyRlzpjl> getRyrlapjlByStartAndEnd(int start,int end);
+    List<PztRyRlzpjl> getRyrlapjlByStartAndEnd(@Param("start") int start, @Param("end") int end, @Param("time") String time);
+
+    List<PztRyRlzpjl> getRyrlapjlByStartAndEndCurrentMonth(@Param("start") int start, @Param("end") int end, @Param("time") String time);
+
+    int deleteFsRlzpjl(@Param("time") String time);
 
 }
