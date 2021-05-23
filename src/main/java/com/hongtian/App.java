@@ -16,7 +16,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 @MapperScan("com.hongtian.mapper")
-@EnableScheduling
+//@EnableScheduling
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class);

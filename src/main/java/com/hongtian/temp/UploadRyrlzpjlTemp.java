@@ -80,13 +80,11 @@ public class UploadRyrlzpjlTemp {
                 List<PztRyRlzpjl> list = getList(page,1000);
                 if(CollectionUtils.isEmpty(list) ||
                         DateTimeUtils.addDays(DateTimeUtils.today(),-30).compareTo(list.get(0).getJlsj()) < 0){
-
                     break;
                 }
                 sbComponent.upload(list);
                 total += list.size();
             }
-
         }
     }
 

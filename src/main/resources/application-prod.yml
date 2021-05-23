@@ -49,3 +49,14 @@ server:
   port: 8501
 #数据卷目录
 dataDir: 'Z:\\data\\mongo\\db\\data'
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+  executor:
+    appname: zaxq_task
+    address:
+    ip: 127.0.0.1
+    port: 9999
+    logpath: /data/applogs/xxl-job/jobhandler
+    logretentiondays: 30
